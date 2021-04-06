@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "PasswordResetToken")
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"id", "expiryDate"})
 @ToString
 @AllArgsConstructor
@@ -32,6 +33,10 @@ public class ResetPasswordEntity implements Serializable {
 
     @Column(name = "expiry_date")
     private LocalDateTime expiryDate;
+
+    public ResetPasswordEntity(Long id) {
+        this.id = id;
+    }
 
     public void PasswordResetToken(Long userId) {
         this.userId = userId;

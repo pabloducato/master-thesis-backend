@@ -102,6 +102,8 @@ public class StudentDTO implements Serializable {
     private List<Long> sendingInstitutionIds = new ArrayList<>();
 
     public Student parseStudent() {
+        assert this.getCourseIds() != null;
+        assert this.getSendingInstitutionIds() != null;
         return Student.builder()
                 .studentEmail(this.getStudentEmail())
                 .studentMatriculationNumber(this.getStudentMatriculationNumber())
