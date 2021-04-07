@@ -27,7 +27,7 @@ import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService jwtUserDetailsService;
@@ -66,6 +66,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http.cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
@@ -82,19 +83,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/api/users/reset_password/**").permitAll()
-                .antMatchers("/api/users/{id}/reset_password/**").permitAll()
                 .antMatchers("/", "/csrf", "/v2/api-docs", "/swagger-resources/configuration/ui",
                         "/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security",
                         "/configuration/security", "/swagger-ui", "/swagger-ui.html", "/swagger-ui/**",
                         "/webjars/**", "/v3/api-docs/**", "/spring-security-rest/api/v2/api-docs",
-                        "/spring-security-rest/api/v2/api-docs").permitAll()
+                        "/spring-security-rest/api/v3/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
                         new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService, userRepository, authenticationEntryPoint()), BasicAuthenticationFilter.class);
-
-        http.csrf().disable();
     }
 
     @Bean

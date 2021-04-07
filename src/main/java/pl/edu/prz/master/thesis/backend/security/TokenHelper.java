@@ -27,7 +27,7 @@ public class TokenHelper {
     @Value("${jwt.header}")
     private String authHeader;
 
-    private static final String TOKEN_PERFIX = "Bearer ";
+    private static final String TOKEN_PREFIX = "Bearer ";
 
     private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
@@ -79,7 +79,7 @@ public class TokenHelper {
     public String getToken(HttpServletRequest request) {
         String header = request.getHeader(authHeader);
         if (header != null) {
-            return header.substring(TOKEN_PERFIX.length());
+            return header.substring(TOKEN_PREFIX.length());
         }
         return null;
     }

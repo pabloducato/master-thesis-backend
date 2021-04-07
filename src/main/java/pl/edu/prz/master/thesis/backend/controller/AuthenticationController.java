@@ -1,5 +1,6 @@
 package pl.edu.prz.master.thesis.backend.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@Api(tags = "Authentication Controller")
 @RequestMapping(value = "/auth", produces = APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 

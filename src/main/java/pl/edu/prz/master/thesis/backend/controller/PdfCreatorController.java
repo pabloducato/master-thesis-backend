@@ -1,5 +1,6 @@
 package pl.edu.prz.master.thesis.backend.controller;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Slf4j
+@Api(tags = "Pdf Creator Controller")
 @RequestMapping(value = "/api/pdf", produces = APPLICATION_JSON_VALUE)
 public class PdfCreatorController {
 
