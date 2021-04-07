@@ -4,9 +4,10 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.dto.UserDTO;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -48,8 +49,8 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name="photo_blob")
-    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "photo_blob")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
     @Column(name = "photo_content_length")

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 public class BaseRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> {
+
     public BaseRepository(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
     }

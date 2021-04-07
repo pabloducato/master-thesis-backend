@@ -27,7 +27,7 @@ import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService jwtUserDetailsService;
@@ -84,6 +84,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/users/reset_password/**").permitAll()
                 .antMatchers("/api/users/{id}/reset_password/**").permitAll()
+                .antMatchers("/", "/csrf", "/v2/api-docs", "/swagger-resources/configuration/ui",
+                        "/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security",
+                        "/configuration/security", "/swagger-ui", "/swagger-ui.html", "/swagger-ui/**",
+                        "/webjars/**", "/v3/api-docs/**", "/spring-security-rest/api/v2/api-docs",
+                        "/spring-security-rest/api/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
@@ -91,9 +96,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
     }
-
-    //      .antMatchers( "/api/students/**").permitAll()
-    //      .antMatchers( "/api/students/{id}/**").permitAll()
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
