@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 @Configuration
@@ -21,11 +22,15 @@ import java.util.function.Predicate;
 public class SwaggerConfiguration implements WebMvcConfigurer {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enableUrlTemplating(false)
+                .forCodeGeneration(true)
+                .protocols(Set.of("http", "https"))
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
@@ -60,6 +65,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex(DEFAULT_INCLUDE_PATTERN))
                 .build();
     }
 
