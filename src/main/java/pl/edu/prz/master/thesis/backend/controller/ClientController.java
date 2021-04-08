@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController(value = "/clients")
-@Api(tags = "Clients Rest Controller")
-public class ClientsRestController {
+@Api(tags = "Client Controller")
+public class ClientController {
 
     @ApiOperation(value = "This method is used to get the clients.")
     @GetMapping
