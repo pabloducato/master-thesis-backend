@@ -4,72 +4,55 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.dto.UserDTO;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "Users")
-@Data
-@EqualsAndHashCode(exclude = {"id"})
-@ToString()
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "USER_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @Column(name = "EMAIL", nullable = false, unique = true, updatable = false)
     private String email;
 
-    @NotNull
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @Column(name = "LAST_PASSWORD_MODIFIED")
     private Date lastPasswordModified;
 
-    @NotNull
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @NotNull
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @NotNull
+    @Column(name = "STATUS", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status = Status.BLOCKED;
+    private Status status;
 
-    @NotNull
+    @Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "photo_blob")
+    @Column(name = "PHOTO_BLOB")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
-    @Column(name = "photo_content_length")
+    @Column(name = "PHOTO_CONTENT_LENGTH")
     private Integer photoContentLength;
 
-    @Column(name = "photo_content_type", length = 50)
+    @Column(name = "PHOTO_CONTENT_TYPE", length = 50)
     private String photoContentType;
-
-    public enum Role {
-        ADMINISTRATOR,
-        SUPERADMINISTRATOR,
-        USER
-    }
-
-    public enum Status {
-        ACTIVE,
-        BLOCKED,
-        INACTIVE
-    }
 
     public UserDTO mapToDTO() {
         return UserDTO.builder()
