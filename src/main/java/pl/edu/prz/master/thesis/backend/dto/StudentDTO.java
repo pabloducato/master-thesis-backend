@@ -1,15 +1,14 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
-import lombok.*;
-import org.springframework.lang.Nullable;
-import pl.edu.prz.master.thesis.backend.entity.Student;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.edu.prz.master.thesis.backend.entity.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 @Data
@@ -17,100 +16,99 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentDTO implements Serializable {
+
+    @ApiModelProperty(notes = "The student's id")
     private Long id;
 
-    @NotNull
-    @Email
+    @ApiModelProperty(notes = "The student's email")
     private String studentEmail;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's academic year")
     private String academicYear;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's field of study")
     private String fieldOfStudy;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's department")
     private String department;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's degree of study")
     private String degreeOfStudy;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's semester")
     private String semester;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator academic title")
     private String departmentalCoordinatorAcademicTitle;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator first name")
     private String departmentalCoordinatorFirstName;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator last name")
     private String departmentalCoordinatorLastName;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator phone")
     private String departmentalCoordinatorPhone;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator fax")
     private String departmentalCoordinatorFax;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's departmental coordinator email")
     private String departmentalCoordinatorEmail;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's matriculation number")
     private Long studentMatriculationNumber;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's first name")
     private String studentFirstName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's last name")
     private String studentLastName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's date of birth")
     private Date studentDateOfBirth;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's period of study from")
     private Date studentPeriodOfStudyFrom;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's period of study until")
     private Date studentPeriodOfStudyUntil;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's place of birth")
     private String studentPlaceOfBirth;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's nationality")
     private String studentNationality;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's current address")
     private String studentCurrentAddress;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's phone")
     private String studentPhone;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's sex")
     private String studentSex;
 
-    @NotNull
+    @ApiModelProperty(notes = "The student's study cycle")
     private String studyCycle;
 
-    @Nullable
+    @ApiModelProperty(notes = "The student's photo blob")
     private byte[] photoBlob;
 
-    @Nullable
-    private List<Long> courseIds = new ArrayList<>();
+    @ApiModelProperty(notes = "The student's courses")
+    private List<Course> courses;
 
-    @Nullable
-    private List<Long> sendingInstitutionIds = new ArrayList<>();
+    @ApiModelProperty(notes = "The student's sending institution ids")
+    private List<SendingInstitution> sendingInstitutions;
 
     public Student parseStudent() {
-        assert this.getCourseIds() != null;
-        assert this.getSendingInstitutionIds() != null;
         return Student.builder()
                 .studentEmail(this.getStudentEmail())
                 .studentMatriculationNumber(this.getStudentMatriculationNumber())
                 .academicYear(this.getAcademicYear())
                 .fieldOfStudy(this.getFieldOfStudy())
                 .department(this.getDepartment())
-                .degreeOfStudy(Student.DegreeOfStudy.valueOf(this.getDegreeOfStudy()))
+                .degreeOfStudy(DegreeOfStudy.valueOf(this.getDegreeOfStudy()))
                 .studentFirstName(this.getStudentFirstName())
                 .studentLastName(this.getStudentLastName())
                 .studentDateOfBirth(this.getStudentDateOfBirth())
@@ -120,9 +118,9 @@ public class StudentDTO implements Serializable {
                 .studentNationality(this.getStudentNationality())
                 .studentCurrentAddress(this.getStudentCurrentAddress())
                 .studentPhone(this.getStudentPhone())
-                .studentSex(Student.Sex.valueOf(this.getStudentSex()))
-                .studyCycle(Student.StudyCycle.valueOf(this.getStudyCycle()))
-                .semester(Student.Semester.valueOf(this.getSemester()))
+                .studentSex(Sex.valueOf(this.getStudentSex()))
+                .studyCycle(StudyCycle.valueOf(this.getStudyCycle()))
+                .semester(Semester.valueOf(this.getSemester()))
                 .departmentalCoordinatorAcademicTitle(this.getDepartmentalCoordinatorAcademicTitle())
                 .departmentalCoordinatorFirstName(this.getDepartmentalCoordinatorFirstName())
                 .departmentalCoordinatorLastName(this.getDepartmentalCoordinatorLastName())
@@ -130,8 +128,8 @@ public class StudentDTO implements Serializable {
                 .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
                 .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
                 .photoBlob(this.getPhotoBlob())
-                .courseIds(new HashSet<>(this.getCourseIds()))
-                .sendingInstitutionIds(new HashSet<>(this.getSendingInstitutionIds()))
+                .courses(this.getCourses())
+                .sendingInstitutions(this.getSendingInstitutions())
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.prz.master.thesis.backend.dto.ChangePasswordDTO;
 import pl.edu.prz.master.thesis.backend.dto.UserDTO;
 import pl.edu.prz.master.thesis.backend.entity.ResetPasswordEntity;
+import pl.edu.prz.master.thesis.backend.entity.Status;
 import pl.edu.prz.master.thesis.backend.entity.User;
 import pl.edu.prz.master.thesis.backend.repository.PasswordResetTokenRepository;
 import pl.edu.prz.master.thesis.backend.repository.StudentRepository;
@@ -59,7 +60,7 @@ public class UserService {
     public void createUser(User user) {
         String password;
         if (user.getPassword() == null) {
-            password = genaratePassword();
+            password = generatePassword();
         } else if (validPassword(user.getPassword())) {
             password = user.getPassword();
         } else {
@@ -77,7 +78,7 @@ public class UserService {
         if (userRepository.existsById(id)) {
             user.setPassword(userRepository.getOne(id).getPassword());
         } else {
-            String password = genaratePassword();
+            String password = generatePassword();
             user.setPassword(encodePassword(password));
 //      String text = String.format(emailSender.templateNewUserMessage().getText(), password);
 //      emailSender.sendSimpleMessage(user.getEmail(), "New password", text);
@@ -87,7 +88,7 @@ public class UserService {
 
     public void deactivateUser(Long id) {
         User user = userRepository.getOne(id);
-        user.setStatus(User.Status.INACTIVE);
+        user.setStatus(Status.INACTIVE);
         userRepository.save(user);
     }
 
@@ -154,7 +155,7 @@ public class UserService {
             throw new AccessDeniedException("Token expired");
         }
         User user = passToken.getUser();
-        String password = genaratePassword();
+        String password = generatePassword();
         user.setPassword(encodePassword(password));
         user.setLastPasswordModified(new Date());
         userRepository.save(user);
@@ -163,7 +164,7 @@ public class UserService {
         emailComponent.sendSimpleMessage(user.getEmail(), "New password", text);
     }
 
-    private String genaratePassword() {
+    private String generatePassword() {
         return RandomStringUtils.random(10, true, true);
     }
 

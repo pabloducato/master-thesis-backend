@@ -21,7 +21,7 @@ public class UserDetailsEntity implements UserDetails {
         this.password = user.getPassword();
         this.authorities = new LinkedList<>();
         this.authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
-        this.enabled = (user.getStatus().equals(User.Status.ACTIVE));
+        this.enabled = (user.getStatus().equals(Status.ACTIVE));
     }
 
     @Override

@@ -1,165 +1,112 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.dto.StudentDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Date;
+import java.util.List;
 
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
-
+@Getter
+@Setter
 @Entity
-@Table(name = "Students")
-@Data
-@EqualsAndHashCode(exclude = {"id", "courseIds", "courses", "sendingInstitutionIds", "sendingInstitutions"})
-@ToString(exclude = {"courseIds", "courses", "sendingInstitutionIds", "sendingInstitutions"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "students")
 public class Student implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "STUDENT_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @Column(name = "STUDENT_EMAIL", nullable = false, unique = true, updatable = false)
     private String studentEmail;
 
-    @NotNull
+    @Column(name = "STUDENT_MATRICULATION_NUMBER", nullable = false)
     private Long studentMatriculationNumber;
 
-    @NotNull
+    @Column(name = "ACADEMIC_YEAR", nullable = false)
     private String academicYear;
 
-    @NotNull
+    @Column(name = "FIELD_OF_STUDY", nullable = false)
     private String fieldOfStudy;
 
-    @NotNull
+    @Column(name = "DEPARTMENT", nullable = false)
     private String department;
 
-    @NotNull
+    @Column(name = "DEGREE_OF_STUDY", nullable = false)
     @Enumerated(EnumType.STRING)
     private DegreeOfStudy degreeOfStudy;
 
-    @NotNull
+    @Column(name = "SEMESTER", nullable = false)
     @Enumerated(EnumType.STRING)
     private Semester semester;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_ACADEMIC_TITLE", nullable = false)
     private String departmentalCoordinatorAcademicTitle;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_FIRST_NAME", nullable = false)
     private String departmentalCoordinatorFirstName;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_LAST_NAME", nullable = false)
     private String departmentalCoordinatorLastName;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_PHONE", nullable = false)
     private String departmentalCoordinatorPhone;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_FAX", nullable = false)
     private String departmentalCoordinatorFax;
 
-    @Nullable
+    @Column(name = "DEPARTMENTAL_COORDINATOR_EMAIL", nullable = false)
     private String departmentalCoordinatorEmail;
 
-    @NotNull
+    @Column(name = "STUDENT_FIRST_NAME", nullable = false)
     private String studentFirstName;
 
-    @NotNull
+    @Column(name = "STUDENT_LAST_NAME", nullable = false)
     private String studentLastName;
 
-    @NotNull
+    @Column(name = "STUDENT_DATE_OF_BIRTH", nullable = false)
     private Date studentDateOfBirth;
 
-    @NotNull
+    @Column(name = "STUDENT_PERIOD_OF_STUDY_FROM", nullable = false)
     private Date studentPeriodOfStudyFrom;
 
-    @NotNull
+    @Column(name = "STUDENT_PERIOD_OF_STUDY_UNTIL", nullable = false)
     private Date studentPeriodOfStudyUntil;
 
-    @NotNull
+    @Column(name = "STUDENT_PLACE_OF_BIRTH", nullable = false)
     private String studentPlaceOfBirth;
 
-    @NotNull
+    @Column(name = "STUDENT_NATIONALITY", nullable = false)
     private String studentNationality;
 
-    @Nullable
+    @Column(name = "STUDENT_CURRENT_ADDRESS", nullable = false)
     private String studentCurrentAddress;
 
-    @Nullable
+    @Column(name = "STUDENT_PHONE", nullable = false)
     private String studentPhone;
 
-    @Nullable
+    @Column(name = "SEX", nullable = false)
     @Enumerated(EnumType.STRING)
     private Sex studentSex = Sex.HIDDEN;
 
-    @NotNull
+    @Column(name = "STUDY_CYCLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private StudyCycle studyCycle;
 
-    @Column(name="photo_blob")
-    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "PHOTO_BLOB")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
-    @Transient
-    private Set<Long> courseIds = new HashSet<>();
+    @OneToMany(mappedBy = "student")
+    private List<Course> courses;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(SAVE_UPDATE)
-    @JoinTable(
-            name = "StudentCourses",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")}
-    )
-    @Builder.Default
-    private Set<Course> courses = new HashSet<>();
-
-    @Transient
-    private Set<Long> sendingInstitutionIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(SAVE_UPDATE)
-    @JoinTable(
-            name = "StudentSendingInstitutions",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "sending_institution_id")}
-    )
-    @Builder.Default
-    private Set<SendingInstitution> sendingInstitutions = new HashSet<>();
-
-
-    public enum Semester {
-        S,
-        W
-    }
-
-    public enum Sex {
-        MALE,
-        FEMALE,
-        HIDDEN
-    }
-
-    public enum StudyCycle {
-        FULLTIME,
-        EXTERNAL
-    }
-
-    public enum DegreeOfStudy {
-        BACHELOR,
-        MASTER
-    }
+    @OneToMany(mappedBy = "student")
+    private List<SendingInstitution> sendingInstitutions;
 
     public StudentDTO mapToDTO() {
         return StudentDTO.builder()
@@ -189,14 +136,8 @@ public class Student implements Serializable {
                 .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
                 .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
                 .photoBlob(this.getPhotoBlob())
-                .courseIds(this.getCourses()
-                        .stream()
-                        .map(Course::getId)
-                        .collect(Collectors.toList()))
-                .sendingInstitutionIds(this.getSendingInstitutions()
-                        .stream()
-                        .map(SendingInstitution::getId)
-                        .collect(Collectors.toList()))
+                .courses(this.getCourses())
+                .sendingInstitutions(this.getSendingInstitutions())
                 .build();
     }
 }

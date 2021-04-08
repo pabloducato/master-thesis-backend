@@ -1,47 +1,54 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-import org.springframework.lang.Nullable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.edu.prz.master.thesis.backend.entity.Role;
+import pl.edu.prz.master.thesis.backend.entity.Status;
 import pl.edu.prz.master.thesis.backend.entity.User;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Data
-@Builder
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@Data
+@ApiModel(description = "User object stored in database")
 public class UserDTO implements Serializable {
+
+    @ApiModelProperty(notes = "The user's id")
     private Long id;
 
-    @NotNull
-    @Email
+    @ApiModelProperty(notes = "The user's email")
     private String email;
 
+    @ApiModelProperty(notes = "The user's password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @NotNull
+    @ApiModelProperty(notes = "The user's first name")
     private String firstName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The user's last name")
     private String lastName;
 
-    @NotNull
-    private String status;
+    @ApiModelProperty(notes = "The user's status")
+    private Status status;
 
-    @NotNull
-    private String role;
+    @ApiModelProperty(notes = "The user's role")
+    private Role role;
 
-    @Nullable
+    @ApiModelProperty(notes = "The user's photo blob")
     private byte[] photoBlob;
 
-    @Nullable
+    @ApiModelProperty(notes = "The user's photo content length")
     private Integer photoContentLength;
 
-    @Nullable
+    @ApiModelProperty(notes = "The user's photo content type")
     private String photoContentType;
 
     public User parseUser() {
@@ -50,8 +57,8 @@ public class UserDTO implements Serializable {
                 .password(this.getPassword())
                 .firstName(this.getFirstName())
                 .lastName(this.getLastName())
-                .status(User.Status.valueOf(this.getStatus()))
-                .role(User.Role.valueOf(this.getRole()))
+                .status(Status.valueOf(this.getStatus().name()))
+                .role(Role.valueOf(this.getRole().name()))
                 .photoBlob(this.getPhotoBlob())
                 .photoContentLength(this.getPhotoContentLength())
                 .photoContentType(this.getPhotoContentType())
