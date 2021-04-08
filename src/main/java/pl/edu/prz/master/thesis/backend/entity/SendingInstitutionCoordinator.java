@@ -1,46 +1,40 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.dto.SendingInstitutionCoordinatorDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "SendingInstitutionCoordinators")
-@Data
-@EqualsAndHashCode(exclude = {"id"})
-@ToString()
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "SENDING_INSTITUTION_COORDINATORS")
 public class SendingInstitutionCoordinator implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "SENDING_INSTITUTION_COORDINATOR_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_EMAIL", nullable = false, unique = true, updatable = false)
     private String sendingInstitutionCoordinatorEmail;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_ACADEMIC_TITLE", nullable = false)
     private String sendingInstitutionCoordinatorAcademicTitle;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_FIRST_NAME", nullable = false)
     private String sendingInstitutionCoordinatorFirstName;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_LAST_NAME", nullable = false)
     private String sendingInstitutionCoordinatorLastName;
 
-    @Nullable
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_PHONE", nullable = false)
     private String sendingInstitutionCoordinatorPhone;
 
-    @Nullable
+    @Column(name = "SENDING_INSTITUTION_COORDINATOR_FAX", nullable = false)
     private String sendingInstitutionCoordinatorFax;
 
     public SendingInstitutionCoordinatorDTO mapToDTO() {

@@ -2,9 +2,9 @@ package pl.edu.prz.master.thesis.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.prz.master.thesis.backend.entity.PdfCourseProtocol;
-import pl.edu.prz.master.thesis.backend.entity.PdfIndividualCurriculum;
-import pl.edu.prz.master.thesis.backend.entity.PdfTranscriptOfRecords;
+import pl.edu.prz.master.thesis.backend.pdf.PdfCourseProtocol;
+import pl.edu.prz.master.thesis.backend.pdf.PdfIndividualCurriculum;
+import pl.edu.prz.master.thesis.backend.pdf.PdfTranscriptOfRecords;
 import pl.edu.prz.master.thesis.backend.pdf.PdfCreator;
 
 import java.io.ByteArrayOutputStream;

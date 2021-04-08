@@ -1,4 +1,4 @@
-package pl.edu.prz.master.thesis.backend.entity;
+package pl.edu.prz.master.thesis.backend.pdf;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,14 +12,14 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PdfCourseProtocol {
+public class PdfIndividualCurriculum {
 
     @NotNull
     private List<PdfStudent> students;
 
     @NotNull
-    private List<PdfCoordinator> coordinators;
+    private List<PdfCourse> courses;
 
     @NotNull
-    private List<PdfCourse> courses;
+    private List<PdfSendingInstitution> sendingInstitutions;
 }

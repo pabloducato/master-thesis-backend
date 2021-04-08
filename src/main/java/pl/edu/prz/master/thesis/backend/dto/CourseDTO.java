@@ -1,67 +1,68 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.entity.Course;
+import pl.edu.prz.master.thesis.backend.entity.CourseCoordinator;
+import pl.edu.prz.master.thesis.backend.entity.Student;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Course object stored in database")
 public class CourseDTO implements Serializable {
+
+    @ApiModelProperty(notes = "The course's id")
     private Long id;
 
-    @Nullable
+    @ApiModelProperty(notes = "The course's unit code")
     private String courseUnitCode;
 
-    @NotNull
-    private String name;
+    @ApiModelProperty(notes = "The course's name")
+    private String courseName;
 
-    @NotNull
-    private String durationOfCourseUnit;
+    @ApiModelProperty(notes = "The course's duration of unit")
+    private String courseDurationOfUnit;
 
-    @NotNull
-    private Long credits;
+    @ApiModelProperty(notes = "The course's credits")
+    private Long courseCredits;
 
-    @NotNull
-    private boolean active;
+    @ApiModelProperty(notes = "The course whether is active")
+    private boolean courseActive;
 
-    @Nullable
-    private List<Long> studentIds = new ArrayList<>();
+    @ApiModelProperty(notes = "The course's semester'")
+    private String courseSemester;
 
-    @Nullable
-    private List<Long> courseCoordinatorIds = new ArrayList<>();
+    @ApiModelProperty(notes = "The course's department'")
+    private String courseDepartment;
 
-    @NotNull
-    private String semester;
+    @ApiModelProperty(notes = "The course's department'")
+    private String courseNumberOfHours;
 
-    @NotNull
-    private String department;
+    @ApiModelProperty(notes = "The course's student ids'")
+    private List<Student> courseStudents;
 
-    @NotNull
-    private String numberOfHours;
+    @ApiModelProperty(notes = "The course's coordinator ids'")
+    private List<CourseCoordinator> courseCoordinators;
 
     public Course parseCourse() {
         return Course.builder()
                 .courseUnitCode(this.getCourseUnitCode())
-                .name(this.getName())
-                .durationOfCourseUnit(this.getDurationOfCourseUnit())
-                .credits(this.getCredits())
-                .active(this.isActive())
-                .studentIds(new HashSet<>(this.getStudentIds()))
-                .courseCoordinatorIds(new HashSet<>(this.getCourseCoordinatorIds()))
-                .semester(this.getSemester())
-                .department(this.getDepartment())
-                .numberOfHours(this.getNumberOfHours())
+                .courseName(this.getCourseName())
+                .courseDurationOfUnit(this.getCourseDurationOfUnit())
+                .courseCredits(this.getCourseCredits())
+                .courseActive(this.isCourseActive())
+                .courseSemester(this.getCourseSemester())
+                .courseDepartment(this.getCourseDepartment())
+                .courseNumberOfHours(this.getCourseNumberOfHours())
                 .build();
     }
 }

@@ -3,6 +3,10 @@ package pl.edu.prz.master.thesis.backend.entity;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.dto.StudentDTO;
+import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
+import pl.edu.prz.master.thesis.backend.enums.Semester;
+import pl.edu.prz.master.thesis.backend.enums.Sex;
+import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +19,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "students")
+@Table(name = "STUDENTS")
 public class Student implements Serializable {
 
     @Id
@@ -90,7 +94,7 @@ public class Student implements Serializable {
     @Column(name = "STUDENT_PHONE", nullable = false)
     private String studentPhone;
 
-    @Column(name = "SEX", nullable = false)
+    @Column(name = "STUDENT_SEX", nullable = false)
     @Enumerated(EnumType.STRING)
     private Sex studentSex = Sex.HIDDEN;
 
@@ -98,7 +102,7 @@ public class Student implements Serializable {
     @Enumerated(EnumType.STRING)
     private StudyCycle studyCycle;
 
-    @Column(name = "PHOTO_BLOB")
+    @Column(name = "STUDENT_PHOTO_BLOB")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
@@ -136,8 +140,6 @@ public class Student implements Serializable {
                 .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
                 .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
                 .photoBlob(this.getPhotoBlob())
-                .courses(this.getCourses())
-                .sendingInstitutions(this.getSendingInstitutions())
                 .build();
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.prz.master.thesis.backend.dto.ChangePasswordDTO;
 import pl.edu.prz.master.thesis.backend.dto.UserDTO;
 import pl.edu.prz.master.thesis.backend.entity.ResetPasswordEntity;
-import pl.edu.prz.master.thesis.backend.entity.Status;
+import pl.edu.prz.master.thesis.backend.enums.Status;
 import pl.edu.prz.master.thesis.backend.entity.User;
 import pl.edu.prz.master.thesis.backend.repository.PasswordResetTokenRepository;
 import pl.edu.prz.master.thesis.backend.repository.StudentRepository;

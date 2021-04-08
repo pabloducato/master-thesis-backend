@@ -1,104 +1,67 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.dto.CourseDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
-
+@Getter
+@Setter
 @Entity
-@Table(name = "Courses")
-@Data
-@EqualsAndHashCode(exclude = {"id", "students", "studentIds", "owner", "courseCoordinatorIds", "courseCoordinators"})
-@ToString(exclude = {"students", "owner", "courseCoordinators"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "COURSES")
 public class Course implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "COURSE_SEQUENCE")
     private Long id;
 
-    @Column(name = "course_unit_code")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "STUDENT_ID", nullable = false, updatable = false, referencedColumnName = "ID")
+    private Student student;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "COURSE_COORDINATOR_ID", nullable = false, updatable = false, referencedColumnName = "ID")
+    private CourseCoordinator courseCoordinator;
+
+    @Column(name = "COURSE_UNIT_CODE")
     private String courseUnitCode;
 
-    @NotNull
-    @Column(unique = true)
-    private String name;
+    @Column(name = "COURSE_NAME", nullable = false, unique = true, updatable = false)
+    private String courseName;
 
-    @NotNull
-    private String durationOfCourseUnit;
+    @Column(name = "COURSE_DURATION_OF_UNIT", nullable = false)
+    private String courseDurationOfUnit;
 
-    @NotNull
-    private Long credits;
+    @Column(name = "COURSE_CREDITS", nullable = false)
+    private Long courseCredits;
 
-    private boolean active;
+    @Column(name = "COURSE_IS_ACTIVE")
+    private boolean courseActive;
 
-    @NotNull
-    private String semester;
+    @Column(name = "COURSE_SEMESTER", nullable = false)
+    private String courseSemester;
 
-    @NotNull
-    private String department;
+    @Column(name = "COURSE_DEPARTMENT", nullable = false)
+    private String courseDepartment;
 
-    @NotNull
-    private String numberOfHours;
-
-    @Nullable
-    @Transient
-    private Set<Long> studentIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade({CascadeType.SAVE_UPDATE})
-    @JoinTable(
-            name = "StudentCourses",
-            joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-    )
-    @Builder.Default
-    private Set<Student> students = new HashSet<>();
-
-    @Transient
-    private Set<Long> courseCoordinatorIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(SAVE_UPDATE)
-    @JoinTable(
-            name = "CourseOwnedCoordinators",
-            joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_coordinator_id")}
-    )
-    @Builder.Default
-    private Set<CourseCoordinator> courseCoordinators = new HashSet<>();
+    @Column(name = "COURSE_NUMBER_OF_HOURS", nullable = false)
+    private String courseNumberOfHours;
 
     public CourseDTO mapToDTO() {
         return CourseDTO.builder()
                 .id(this.getId())
                 .courseUnitCode(this.getCourseUnitCode())
-                .name(this.getName())
-                .durationOfCourseUnit(this.getDurationOfCourseUnit())
-                .credits(this.getCredits())
-                .active(this.isActive())
-                .semester(this.getSemester())
-                .department(this.getDepartment())
-                .numberOfHours(this.getNumberOfHours())
-                .studentIds(this.getStudents().stream()
-                        .map(Student::getId)
-                        .collect(Collectors.toList()))
-                .courseCoordinatorIds(this.getCourseCoordinators().stream()
-                        .map(CourseCoordinator::getId)
-                        .collect(Collectors.toList()))
+                .courseName(this.getCourseName())
+                .courseDurationOfUnit(this.getCourseDurationOfUnit())
+                .courseCredits(this.getCourseCredits())
+                .courseActive(this.isCourseActive())
+                .courseSemester(this.getCourseSemester())
+                .courseDepartment(this.getCourseDepartment())
+                .courseNumberOfHours(this.getCourseNumberOfHours())
                 .build();
     }
 }

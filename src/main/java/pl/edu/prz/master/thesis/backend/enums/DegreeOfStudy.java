@@ -1,4 +1,4 @@
-package pl.edu.prz.master.thesis.backend.entity;
+package pl.edu.prz.master.thesis.backend.enums;
 
 public enum DegreeOfStudy {
     BACHELOR,

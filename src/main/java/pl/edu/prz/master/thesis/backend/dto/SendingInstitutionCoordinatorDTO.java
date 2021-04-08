@@ -1,38 +1,39 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.edu.prz.master.thesis.backend.entity.SendingInstitutionCoordinator;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
-@Data
-@Builder
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@Data
+@ApiModel(description = "Sending institution coordinator object stored in database.")
 public class SendingInstitutionCoordinatorDTO {
+
+    @ApiModelProperty(notes = "The sending institution coordinator's id")
     private Long id;
 
-    @NotNull
-    @Email
+    @ApiModelProperty(notes = "The sending institution coordinator's email")
     private String sendingInstitutionCoordinatorEmail;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution coordinator's academic title")
     private String sendingInstitutionCoordinatorAcademicTitle;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution coordinator's first name")
     private String sendingInstitutionCoordinatorFirstName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution coordinator's last name")
     private String sendingInstitutionCoordinatorLastName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution coordinator's phone")
     private String sendingInstitutionCoordinatorPhone;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution coordinator's fax")
     private String sendingInstitutionCoordinatorFax;
 
     public SendingInstitutionCoordinator parseSendingInstitutionCoordinator() {

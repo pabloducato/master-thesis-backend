@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.prz.master.thesis.backend.entity.PdfBox;
-import pl.edu.prz.master.thesis.backend.entity.PdfCourseProtocol;
-import pl.edu.prz.master.thesis.backend.entity.PdfIndividualCurriculum;
-import pl.edu.prz.master.thesis.backend.entity.PdfTranscriptOfRecords;
+import pl.edu.prz.master.thesis.backend.pdf.PdfBox;
+import pl.edu.prz.master.thesis.backend.pdf.PdfCourseProtocol;
+import pl.edu.prz.master.thesis.backend.pdf.PdfIndividualCurriculum;
+import pl.edu.prz.master.thesis.backend.pdf.PdfTranscriptOfRecords;
 import pl.edu.prz.master.thesis.backend.exception.PDFNotCreatedException;
 import pl.edu.prz.master.thesis.backend.service.PdfCreatorService;
 

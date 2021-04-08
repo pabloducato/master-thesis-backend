@@ -1,14 +1,13 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.entity.SendingInstitution;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,36 +16,34 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Sending institution object stored in database.")
 public class SendingInstitutionDTO {
+
+    @ApiModelProperty(notes = "The sending institution's id")
     private Long id;
 
-    @NotNull
-    @Email
+    @ApiModelProperty(notes = "The sending institution's email")
     private String sendingInstitutionEmail;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's name")
     private String sendingInstitutionName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's address")
     private String sendingInstitutionAddress;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's post code")
     private String sendingInstitutionPostCode;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's country")
     private String sendingInstitutionCountry;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's phone")
     private String sendingInstitutionPhone;
 
-    @NotNull
+    @ApiModelProperty(notes = "The sending institution's fax")
     private String sendingInstitutionFax;
 
-    @Nullable
-    private List<Long> studentIds = new ArrayList<>();
-
     public SendingInstitution parseSendingInstitution() {
-        assert this.getStudentIds() != null;
         return SendingInstitution.builder()
                 .sendingInstitutionEmail(this.getSendingInstitutionEmail())
                 .sendingInstitutionName(this.getSendingInstitutionName())
@@ -55,7 +52,6 @@ public class SendingInstitutionDTO {
                 .sendingInstitutionCountry(this.getSendingInstitutionCountry())
                 .sendingInstitutionPhone(this.getSendingInstitutionPhone())
                 .sendingInstitutionFax(this.getSendingInstitutionFax())
-                .studentIds(new HashSet<>(this.getStudentIds()))
                 .build();
     }
 }

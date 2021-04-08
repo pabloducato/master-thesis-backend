@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.Role;
-import pl.edu.prz.master.thesis.backend.entity.Status;
+import pl.edu.prz.master.thesis.backend.enums.Role;
+import pl.edu.prz.master.thesis.backend.enums.Status;
 import pl.edu.prz.master.thesis.backend.entity.User;
 
 import java.io.Serializable;

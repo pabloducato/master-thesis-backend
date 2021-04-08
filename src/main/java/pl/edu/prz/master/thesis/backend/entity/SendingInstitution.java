@@ -1,71 +1,48 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.dto.SendingInstitutionDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "SendingInstitutions")
-@Data
-@EqualsAndHashCode(exclude = {"id", "students", "studentIds"})
-@ToString(exclude = {"students"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "SENDING_INSTITUTIONS")
 public class SendingInstitution implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "SENDING_INSTITUTION_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "STUDENT_ID", nullable = false, updatable = false, referencedColumnName = "ID")
+    private Student student;
+
+    @Column(name = "SENDING_INSTITUTION_EMAIL", nullable = false, unique = true, updatable = false)
     private String sendingInstitutionEmail;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_NAME", nullable = false)
     private String sendingInstitutionName;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_ADDRESS", nullable = false)
     private String sendingInstitutionAddress;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_POST_CODE", nullable = false)
     private String sendingInstitutionPostCode;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_COUNTRY", nullable = false)
     private String sendingInstitutionCountry;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_PHONE", nullable = false)
     private String sendingInstitutionPhone;
 
-    @NotNull
+    @Column(name = "SENDING_INSTITUTION_FAX", nullable = false)
     private String sendingInstitutionFax;
-
-    @Nullable
-    @Transient
-    private Set<Long> studentIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade({CascadeType.SAVE_UPDATE})
-    @JoinTable(
-            name = "StudentSendingInstitutions",
-            joinColumns = {@JoinColumn(name = "sending_institution_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-    )
-    @Builder.Default
-    private Set<Student> students = new HashSet<>();
 
     public SendingInstitutionDTO mapToDTO() {
         return SendingInstitutionDTO.builder()
@@ -77,9 +54,6 @@ public class SendingInstitution implements Serializable {
                 .sendingInstitutionCountry(this.getSendingInstitutionCountry())
                 .sendingInstitutionPhone(this.getSendingInstitutionPhone())
                 .sendingInstitutionFax(this.getSendingInstitutionFax())
-                .studentIds(this.getStudents().stream()
-                        .map(Student::getId)
-                        .collect(Collectors.toList()))
                 .build();
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.edu.prz.master.thesis.backend.enums.Status;
 
 import java.util.Collection;
 import java.util.LinkedList;

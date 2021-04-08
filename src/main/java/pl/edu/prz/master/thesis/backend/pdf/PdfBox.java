@@ -1,4 +1,4 @@
-package pl.edu.prz.master.thesis.backend.entity;
+package pl.edu.prz.master.thesis.backend.pdf;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

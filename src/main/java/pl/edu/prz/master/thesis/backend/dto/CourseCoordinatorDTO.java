@@ -1,50 +1,49 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
+import pl.edu.prz.master.thesis.backend.entity.Course;
 import pl.edu.prz.master.thesis.backend.entity.CourseCoordinator;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Course coordinator object stored in database")
 public class CourseCoordinatorDTO implements Serializable {
+
+    @ApiModelProperty(notes = "The course coordinator's id")
     private Long id;
 
-    @NotNull
-    @Email
+    @ApiModelProperty(notes = "The course coordinator's email")
     private String courseCoordinatorEmail;
 
-    @NotNull
+    @ApiModelProperty(notes = "The course coordinator's academic title")
     private String courseCoordinatorAcademicTitle;
 
-    @NotNull
+    @ApiModelProperty(notes = "The course coordinator's first name")
     private String courseCoordinatorFirstName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The course coordinator's last name")
     private String courseCoordinatorLastName;
 
-    @NotNull
+    @ApiModelProperty(notes = "The course coordinator's phone")
     private String courseCoordinatorPhone;
 
-    @NotNull
+    @ApiModelProperty(notes = "The course coordinator's fax")
     private String courseCoordinatorFax;
 
-    @Nullable
-    private List<Long> courseIds = new ArrayList<>();
+    @ApiModelProperty(notes = "The course coordinator's course ids")
+    private List<Course> courses;
 
     public CourseCoordinator parseCourseCoordinator() {
-        assert this.getCourseIds() != null;
         return CourseCoordinator.builder()
                 .courseCoordinatorEmail(this.getCourseCoordinatorEmail())
                 .courseCoordinatorAcademicTitle(this.getCourseCoordinatorAcademicTitle())
@@ -52,7 +51,7 @@ public class CourseCoordinatorDTO implements Serializable {
                 .courseCoordinatorLastName(this.getCourseCoordinatorLastName())
                 .courseCoordinatorPhone(this.getCourseCoordinatorPhone())
                 .courseCoordinatorFax(this.getCourseCoordinatorFax())
-                .courseIds(new HashSet<>(this.getCourseIds()))
+                .courses(this.getCourses())
                 .build();
     }
 }

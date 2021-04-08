@@ -1,20 +1,25 @@
 package pl.edu.prz.master.thesis.backend.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.*;
+import pl.edu.prz.master.thesis.backend.entity.Student;
+import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
+import pl.edu.prz.master.thesis.backend.enums.Semester;
+import pl.edu.prz.master.thesis.backend.enums.Sex;
+import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Student object stored in database")
 public class StudentDTO implements Serializable {
 
     @ApiModelProperty(notes = "The student's id")
@@ -95,12 +100,6 @@ public class StudentDTO implements Serializable {
     @ApiModelProperty(notes = "The student's photo blob")
     private byte[] photoBlob;
 
-    @ApiModelProperty(notes = "The student's courses")
-    private List<Course> courses;
-
-    @ApiModelProperty(notes = "The student's sending institution ids")
-    private List<SendingInstitution> sendingInstitutions;
-
     public Student parseStudent() {
         return Student.builder()
                 .studentEmail(this.getStudentEmail())
@@ -128,8 +127,6 @@ public class StudentDTO implements Serializable {
                 .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
                 .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
                 .photoBlob(this.getPhotoBlob())
-                .courses(this.getCourses())
-                .sendingInstitutions(this.getSendingInstitutions())
                 .build();
     }
 }

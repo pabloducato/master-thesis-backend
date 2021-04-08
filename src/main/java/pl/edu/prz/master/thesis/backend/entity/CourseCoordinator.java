@@ -1,66 +1,45 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.springframework.lang.Nullable;
 import pl.edu.prz.master.thesis.backend.dto.CourseCoordinatorDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "CourseCoordinators")
-@Data
-@EqualsAndHashCode(exclude = {"id", "ownedCourseIds", "ownedCourses", "courseIds", "courses"})
-@ToString(exclude = {"ownedCourseIds", "ownedCourses", "courses"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "COURSE_COORDINATORS")
 public class CourseCoordinator implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "COURSE_COORDINATOR_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @Column(name = "COURSE_COORDINATOR_EMAIL", nullable = false, unique = true, updatable = false)
     private String courseCoordinatorEmail;
 
-    @NotNull
+    @Column(name = "COURSE_COORDINATOR_ACADEMIC_TITLE", nullable = false)
     private String courseCoordinatorAcademicTitle;
 
-    @NotNull
+    @Column(name = "COURSE_COORDINATOR_FIRST_NAME", nullable = false)
     private String courseCoordinatorFirstName;
 
-    @NotNull
+    @Column(name = "COURSE_COORDINATOR_LAST_NAME", nullable = false)
     private String courseCoordinatorLastName;
 
-    @Nullable
+    @Column(name = "COURSE_COORDINATOR_PHONE", nullable = false)
     private String courseCoordinatorPhone;
 
-    @Nullable
+    @Column(name = "COURSE_COORDINATOR_FAX", nullable = false)
     private String courseCoordinatorFax;
 
-    @Nullable
-    @Transient
-    private Set<Long> courseIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinTable(
-            name = "CourseOwnedCoordinators",
-            joinColumns = {@JoinColumn(name = "course_coordinator_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")}
-    )
-    @Builder.Default
-    private Set<Course> courses = new HashSet<>();
+    @OneToMany(mappedBy = "course_coordinator")
+    private List<Course> courses;
 
 
     public CourseCoordinatorDTO mapToDTO() {
@@ -72,9 +51,7 @@ public class CourseCoordinator implements Serializable {
                 .courseCoordinatorLastName(this.getCourseCoordinatorLastName())
                 .courseCoordinatorPhone(this.getCourseCoordinatorPhone())
                 .courseCoordinatorFax(this.getCourseCoordinatorFax())
-                .courseIds(this.getCourses().stream()
-                        .map(Course::getId)
-                        .collect(Collectors.toList()))
+                .courses(this.getCourses())
                 .build();
     }
 }

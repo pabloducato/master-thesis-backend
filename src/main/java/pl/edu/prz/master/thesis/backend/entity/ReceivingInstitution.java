@@ -4,51 +4,46 @@ import lombok.*;
 import pl.edu.prz.master.thesis.backend.dto.ReceivingInstitutionDTO;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "ReceivingInstitutions")
-@Data
-@EqualsAndHashCode(exclude = {"id"})
-@ToString()
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "RECEIVING_INSTITUTIONS")
 public class ReceivingInstitution implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "RECEIVING_INSTITUTION_SEQUENCE")
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    @Email
+    @Column(name = "RECEIVING_INSTITUTION_EMAIL", nullable = false, unique = true, updatable = false)
     private String receivingInstitutionEmail = "kancelaria@prz.edu.pl";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_NAME", nullable = false)
     private String receivingInstitutionName = "Politechnika Rzeszowska";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_PATRON", nullable = false)
     private String receivingInstitutionPatron = "im. Ignacego Łukasiewicza";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_WHERE", nullable = false)
     private String receivingInstitutionWhere = "w Rzeszowie";
 
-    @NotNull
-    private String receivingInstitutionAddress= "Aleja Powstańców Warszawy 12";
+    @Column(name = "RECEIVING_INSTITUTION_ADDRESS", nullable = false)
+    private String receivingInstitutionAddress = "Aleja Powstańców Warszawy 12";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_POST_CODE", nullable = false)
     private String receivingInstitutionPostCode = "35-959 Rzeszów";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_COUNTRY", nullable = false)
     private String receivingInstitutionCountry = "Poland";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_PHONE", nullable = false)
     private String receivingInstitutionPhone = "+48178651100";
 
-    @NotNull
+    @Column(name = "RECEIVING_INSTITUTION_FAX", nullable = false)
     private String receivingInstitutionFax = "+48178541260";
 
     public ReceivingInstitutionDTO mapToDTO() {

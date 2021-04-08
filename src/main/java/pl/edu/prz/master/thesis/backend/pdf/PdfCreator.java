@@ -18,10 +18,6 @@ import org.vandeseer.easytable.structure.Table;
 import org.vandeseer.easytable.structure.cell.CellText;
 import org.vandeseer.easytable.settings.HorizontalAlignment;
 import org.vandeseer.easytable.settings.VerticalAlignment;
-import pl.edu.prz.master.thesis.backend.entity.PdfCoordinator;
-import pl.edu.prz.master.thesis.backend.entity.PdfCourse;
-import pl.edu.prz.master.thesis.backend.entity.PdfSendingInstitution;
-import pl.edu.prz.master.thesis.backend.entity.PdfStudent;
 import pl.edu.prz.master.thesis.backend.exception.PDFNotCreatedException;
 import pl.edu.prz.master.thesis.backend.service.StudentService;
 
