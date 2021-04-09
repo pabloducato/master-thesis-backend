@@ -44,19 +44,7 @@ public class SendingInstitution implements Serializable {
     @Column(name = "FAX", nullable = false)
     private String fax;
 
-    @Nullable
-    @Transient
-    private Set<Long> studentIds = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinTable(
-            name = "STUDENT_HAS_SENDING_INSTITUTIONS",
-            joinColumns = {@JoinColumn(name = "SENDING_INSTITUTION_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")}
-    )
-    @Builder.Default
-    private Set<Student> students = new HashSet<>();
+    @ManyToMany(mappedBy = "studentSendingInstitutions")
+    private Set<Student> students;
 
 }

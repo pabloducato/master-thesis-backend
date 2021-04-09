@@ -1,6 +1,7 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
 import pl.edu.prz.master.thesis.backend.enums.Semester;
@@ -11,6 +12,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Getter
 @Setter
@@ -87,11 +90,18 @@ public class Student implements Serializable {
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "STUDENT_HAS_COURSES",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private Set<Course> studentCourses;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "STUDENT_HAS_SENDING_INSTITUTIONS",
+            joinColumns = @JoinColumn(name = "STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "SENDING_INSTITUTION_ID"))
+    private Set<SendingInstitution> studentSendingInstitutions;
 
 }

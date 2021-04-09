@@ -43,6 +43,13 @@ public class Course implements Serializable {
     @Column(name = "NUMBER_OF_HOURS", nullable = false)
     private String numberOfHours;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "COURSE_HAS_COORDINATORS",
+            joinColumns = @JoinColumn(name = "COURSE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_COORDINATOR_ID"))
+    private Set<CourseCoordinator> courseCoordinators;
+
     @ManyToMany(mappedBy = "studentCourses")
     private Set<Student> students;
 

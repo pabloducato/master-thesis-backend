@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,5 +36,8 @@ public class CourseCoordinator implements Serializable {
 
     @Column(name = "FAX", nullable = false)
     private String fax;
+
+    @ManyToMany(mappedBy = "courseCoordinators")
+    private Set<Course> courses;
 
 }
