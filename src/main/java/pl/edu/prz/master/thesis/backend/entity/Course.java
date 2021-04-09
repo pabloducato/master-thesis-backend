@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,5 +42,8 @@ public class Course implements Serializable {
 
     @Column(name = "NUMBER_OF_HOURS", nullable = false)
     private String numberOfHours;
+
+    @ManyToMany(mappedBy = "studentCourses")
+    private Set<Student> students;
 
 }

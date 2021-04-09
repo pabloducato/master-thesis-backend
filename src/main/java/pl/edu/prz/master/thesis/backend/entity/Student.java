@@ -10,7 +10,7 @@ import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -86,5 +86,12 @@ public class Student implements Serializable {
     @Column(name = "PHOTO_BLOB")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "STUDENT_HAS_COURSES",
+            joinColumns = @JoinColumn(name = "STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    private Set<Course> studentCourses;
 
 }

@@ -1,9 +1,14 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -38,5 +43,20 @@ public class SendingInstitution implements Serializable {
 
     @Column(name = "SENDING_INSTITUTION_FAX", nullable = false)
     private String sendingInstitutionFax;
+
+    @Nullable
+    @Transient
+    private Set<Long> studentIds = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinTable(
+            name = "STUDENT_HAS_SENDING_INSTITUTIONS",
+            joinColumns = {@JoinColumn(name = "SENDING_INSTITUTION_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")}
+    )
+    @Builder.Default
+    private Set<Student> students = new HashSet<>();
 
 }
