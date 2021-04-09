@@ -51,17 +51,4 @@ public class Course implements Serializable {
     @Column(name = "COURSE_NUMBER_OF_HOURS", nullable = false)
     private String courseNumberOfHours;
 
-    public CourseDTO mapToDTO() {
-        return CourseDTO.builder()
-                .id(this.getId())
-                .courseUnitCode(this.getCourseUnitCode())
-                .courseName(this.getCourseName())
-                .courseDurationOfUnit(this.getCourseDurationOfUnit())
-                .courseCredits(this.getCourseCredits())
-                .courseActive(this.isCourseActive())
-                .courseSemester(this.getCourseSemester())
-                .courseDepartment(this.getCourseDepartment())
-                .courseNumberOfHours(this.getCourseNumberOfHours())
-                .build();
-    }
 }

@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.edu.prz.master.thesis.backend.enums.Role;
 import pl.edu.prz.master.thesis.backend.enums.Status;
-import pl.edu.prz.master.thesis.backend.entity.User;
 
 import java.io.Serializable;
 
@@ -50,19 +49,5 @@ public class UserDTO implements Serializable {
 
     @ApiModelProperty(notes = "The user's photo content type")
     private String photoContentType;
-
-    public User parseUser() {
-        return User.builder()
-                .email(this.getEmail())
-                .password(this.getPassword())
-                .firstName(this.getFirstName())
-                .lastName(this.getLastName())
-                .status(Status.valueOf(this.getStatus().name()))
-                .role(Role.valueOf(this.getRole().name()))
-                .photoBlob(this.getPhotoBlob())
-                .photoContentLength(this.getPhotoContentLength())
-                .photoContentType(this.getPhotoContentType())
-                .build();
-    }
 
 }

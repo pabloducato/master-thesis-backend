@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@Api(tags = "Authentication Controller")
 @RequestMapping(value = "/auth", produces = APPLICATION_JSON_VALUE)
+@Api(tags = "Authentication Controller")
 public class AuthenticationController {
 
     private final TokenHelper tokenHelper;

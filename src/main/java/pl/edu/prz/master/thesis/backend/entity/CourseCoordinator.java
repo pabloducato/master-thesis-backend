@@ -41,17 +41,4 @@ public class CourseCoordinator implements Serializable {
     @OneToMany(mappedBy = "courseCoordinator")
     private List<Course> courses;
 
-
-    public CourseCoordinatorDTO mapToDTO() {
-        return CourseCoordinatorDTO.builder()
-                .id(this.getId())
-                .courseCoordinatorEmail(this.getCourseCoordinatorEmail())
-                .courseCoordinatorAcademicTitle(this.getCourseCoordinatorAcademicTitle())
-                .courseCoordinatorFirstName(this.getCourseCoordinatorFirstName())
-                .courseCoordinatorLastName(this.getCourseCoordinatorLastName())
-                .courseCoordinatorPhone(this.getCourseCoordinatorPhone())
-                .courseCoordinatorFax(this.getCourseCoordinatorFax())
-                .courses(this.getCourses())
-                .build();
-    }
 }

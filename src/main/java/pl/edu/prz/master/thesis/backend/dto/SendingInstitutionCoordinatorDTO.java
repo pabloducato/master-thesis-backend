@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.SendingInstitutionCoordinator;
 
 @NoArgsConstructor
 @Builder
@@ -36,14 +35,4 @@ public class SendingInstitutionCoordinatorDTO {
     @ApiModelProperty(notes = "The sending institution coordinator's fax")
     private String sendingInstitutionCoordinatorFax;
 
-    public SendingInstitutionCoordinator parseSendingInstitutionCoordinator() {
-        return SendingInstitutionCoordinator.builder()
-                .sendingInstitutionCoordinatorEmail(this.getSendingInstitutionCoordinatorEmail())
-                .sendingInstitutionCoordinatorAcademicTitle(this.getSendingInstitutionCoordinatorAcademicTitle())
-                .sendingInstitutionCoordinatorFirstName(this.getSendingInstitutionCoordinatorFirstName())
-                .sendingInstitutionCoordinatorLastName(this.getSendingInstitutionCoordinatorLastName())
-                .sendingInstitutionCoordinatorPhone(this.getSendingInstitutionCoordinatorPhone())
-                .sendingInstitutionCoordinatorFax(this.getSendingInstitutionCoordinatorFax())
-                .build();
-    }
 }

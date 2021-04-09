@@ -1,7 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import pl.edu.prz.master.thesis.backend.dto.SendingInstitutionCoordinatorDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +17,10 @@ public class SendingInstitutionCoordinator implements Serializable {
     @Id
     @GeneratedValue(generator = "SENDING_INSTITUTION_COORDINATOR_SEQUENCE")
     private Long id;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "STUDENT_ID", nullable = false, updatable = false, referencedColumnName = "ID")
+    private Student student;
 
     @Column(name = "SENDING_INSTITUTION_COORDINATOR_EMAIL", nullable = false, unique = true, updatable = false)
     private String sendingInstitutionCoordinatorEmail;
@@ -37,15 +40,4 @@ public class SendingInstitutionCoordinator implements Serializable {
     @Column(name = "SENDING_INSTITUTION_COORDINATOR_FAX", nullable = false)
     private String sendingInstitutionCoordinatorFax;
 
-    public SendingInstitutionCoordinatorDTO mapToDTO() {
-        return SendingInstitutionCoordinatorDTO.builder()
-                .id(this.getId())
-                .sendingInstitutionCoordinatorEmail(this.getSendingInstitutionCoordinatorEmail())
-                .sendingInstitutionCoordinatorAcademicTitle(this.getSendingInstitutionCoordinatorAcademicTitle())
-                .sendingInstitutionCoordinatorFirstName(this.getSendingInstitutionCoordinatorFirstName())
-                .sendingInstitutionCoordinatorLastName(this.getSendingInstitutionCoordinatorLastName())
-                .sendingInstitutionCoordinatorPhone(this.getSendingInstitutionCoordinatorPhone())
-                .sendingInstitutionCoordinatorFax(this.getSendingInstitutionCoordinatorFax())
-                .build();
-    }
 }

@@ -6,11 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.SendingInstitution;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 @Data
 @Builder
@@ -43,15 +38,4 @@ public class SendingInstitutionDTO {
     @ApiModelProperty(notes = "The sending institution's fax")
     private String sendingInstitutionFax;
 
-    public SendingInstitution parseSendingInstitution() {
-        return SendingInstitution.builder()
-                .sendingInstitutionEmail(this.getSendingInstitutionEmail())
-                .sendingInstitutionName(this.getSendingInstitutionName())
-                .sendingInstitutionAddress(this.getSendingInstitutionAddress())
-                .sendingInstitutionPostCode(this.getSendingInstitutionPostCode())
-                .sendingInstitutionCountry(this.getSendingInstitutionCountry())
-                .sendingInstitutionPhone(this.getSendingInstitutionPhone())
-                .sendingInstitutionFax(this.getSendingInstitutionFax())
-                .build();
-    }
 }

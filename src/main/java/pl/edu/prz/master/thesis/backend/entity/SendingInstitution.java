@@ -44,16 +44,4 @@ public class SendingInstitution implements Serializable {
     @Column(name = "SENDING_INSTITUTION_FAX", nullable = false)
     private String sendingInstitutionFax;
 
-    public SendingInstitutionDTO mapToDTO() {
-        return SendingInstitutionDTO.builder()
-                .id(this.getId())
-                .sendingInstitutionEmail(this.getSendingInstitutionEmail())
-                .sendingInstitutionName(this.getSendingInstitutionName())
-                .sendingInstitutionAddress(this.getSendingInstitutionAddress())
-                .sendingInstitutionPostCode(this.getSendingInstitutionPostCode())
-                .sendingInstitutionCountry(this.getSendingInstitutionCountry())
-                .sendingInstitutionPhone(this.getSendingInstitutionPhone())
-                .sendingInstitutionFax(this.getSendingInstitutionFax())
-                .build();
-    }
 }

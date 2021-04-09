@@ -32,40 +32,22 @@ public class Student implements Serializable {
     @Column(name = "STUDENT_MATRICULATION_NUMBER", nullable = false)
     private Long studentMatriculationNumber;
 
-    @Column(name = "ACADEMIC_YEAR", nullable = false)
-    private String academicYear;
+    @Column(name = "STUDENT_ACADEMIC_YEAR", nullable = false)
+    private String studentAcademicYear;
 
-    @Column(name = "FIELD_OF_STUDY", nullable = false)
-    private String fieldOfStudy;
+    @Column(name = "STUDENT_FIELD_OF_STUDY", nullable = false)
+    private String studentFieldOfStudy;
 
-    @Column(name = "DEPARTMENT", nullable = false)
-    private String department;
+    @Column(name = "STUDENT_DEPARTMENT", nullable = false)
+    private String studentDepartment;
 
-    @Column(name = "DEGREE_OF_STUDY", nullable = false)
+    @Column(name = "STUDENT_DEGREE_OF_STUDY", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DegreeOfStudy degreeOfStudy;
+    private DegreeOfStudy studentDegreeOfStudy;
 
-    @Column(name = "SEMESTER", nullable = false)
+    @Column(name = "STUDENT_SEMESTER", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Semester semester;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_ACADEMIC_TITLE", nullable = false)
-    private String departmentalCoordinatorAcademicTitle;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_FIRST_NAME", nullable = false)
-    private String departmentalCoordinatorFirstName;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_LAST_NAME", nullable = false)
-    private String departmentalCoordinatorLastName;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_PHONE", nullable = false)
-    private String departmentalCoordinatorPhone;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_FAX", nullable = false)
-    private String departmentalCoordinatorFax;
-
-    @Column(name = "DEPARTMENTAL_COORDINATOR_EMAIL", nullable = false)
-    private String departmentalCoordinatorEmail;
+    private Semester studentSemester;
 
     @Column(name = "STUDENT_FIRST_NAME", nullable = false)
     private String studentFirstName;
@@ -112,34 +94,7 @@ public class Student implements Serializable {
     @OneToMany(mappedBy = "student")
     private List<SendingInstitution> sendingInstitutions;
 
-    public StudentDTO mapToDTO() {
-        return StudentDTO.builder()
-                .id(this.getId())
-                .studentEmail(this.getStudentEmail())
-                .studentMatriculationNumber(this.getStudentMatriculationNumber())
-                .academicYear(this.getAcademicYear())
-                .fieldOfStudy(this.getFieldOfStudy())
-                .department(this.getDepartment())
-                .studentFirstName(this.getStudentFirstName())
-                .studentLastName(this.getStudentLastName())
-                .studentDateOfBirth(this.getStudentDateOfBirth())
-                .studentPeriodOfStudyFrom(this.getStudentPeriodOfStudyFrom())
-                .studentPeriodOfStudyUntil(this.getStudentPeriodOfStudyUntil())
-                .studentPlaceOfBirth(this.getStudentPlaceOfBirth())
-                .studentNationality(this.getStudentNationality())
-                .studentCurrentAddress(this.getStudentCurrentAddress())
-                .studentPhone(this.getStudentPhone())
-                .studentSex(this.getStudentSex().toString())
-                .studyCycle(this.getStudyCycle().toString())
-                .semester(this.getSemester().toString())
-                .degreeOfStudy(this.getDegreeOfStudy().toString())
-                .departmentalCoordinatorAcademicTitle(this.getDepartmentalCoordinatorAcademicTitle())
-                .departmentalCoordinatorFirstName(this.getDepartmentalCoordinatorFirstName())
-                .departmentalCoordinatorLastName(this.getDepartmentalCoordinatorLastName())
-                .departmentalCoordinatorPhone(this.getDepartmentalCoordinatorPhone())
-                .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
-                .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
-                .photoBlob(this.getPhotoBlob())
-                .build();
-    }
+    @OneToMany(mappedBy = "student")
+    private List<SendingInstitutionCoordinator> sendingInstitutionCoordinators;
+
 }

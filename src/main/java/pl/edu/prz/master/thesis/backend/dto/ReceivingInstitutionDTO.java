@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.ReceivingInstitution;
 
 @Data
 @Builder
@@ -44,19 +43,5 @@ public class ReceivingInstitutionDTO {
 
     @ApiModelProperty(notes = "The receiving institution's fax")
     private String receivingInstitutionFax;
-
-    public ReceivingInstitution parseReceivingInstitution() {
-        return ReceivingInstitution.builder()
-                .receivingInstitutionEmail(this.getReceivingInstitutionEmail())
-                .receivingInstitutionName(this.getReceivingInstitutionName())
-                .receivingInstitutionPatron(this.getReceivingInstitutionPatron())
-                .receivingInstitutionWhere(this.getReceivingInstitutionWhere())
-                .receivingInstitutionAddress(this.getReceivingInstitutionAddress())
-                .receivingInstitutionPostCode(this.getReceivingInstitutionPostCode())
-                .receivingInstitutionCountry(this.getReceivingInstitutionCountry())
-                .receivingInstitutionPhone(this.getReceivingInstitutionPhone())
-                .receivingInstitutionFax(this.getReceivingInstitutionFax())
-                .build();
-    }
 
 }

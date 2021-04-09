@@ -6,11 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.Student;
-import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
-import pl.edu.prz.master.thesis.backend.enums.Semester;
-import pl.edu.prz.master.thesis.backend.enums.Sex;
-import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,19 +24,19 @@ public class StudentDTO implements Serializable {
     private String studentEmail;
 
     @ApiModelProperty(notes = "The student's academic year")
-    private String academicYear;
+    private String studentAcademicYear;
 
     @ApiModelProperty(notes = "The student's field of study")
-    private String fieldOfStudy;
+    private String studentFieldOfStudy;
 
     @ApiModelProperty(notes = "The student's department")
-    private String department;
+    private String studentDepartment;
 
     @ApiModelProperty(notes = "The student's degree of study")
-    private String degreeOfStudy;
+    private String studentDegreeOfStudy;
 
     @ApiModelProperty(notes = "The student's semester")
-    private String semester;
+    private String studentSemester;
 
     @ApiModelProperty(notes = "The student's departmental coordinator academic title")
     private String departmentalCoordinatorAcademicTitle;
@@ -100,33 +95,4 @@ public class StudentDTO implements Serializable {
     @ApiModelProperty(notes = "The student's photo blob")
     private byte[] photoBlob;
 
-    public Student parseStudent() {
-        return Student.builder()
-                .studentEmail(this.getStudentEmail())
-                .studentMatriculationNumber(this.getStudentMatriculationNumber())
-                .academicYear(this.getAcademicYear())
-                .fieldOfStudy(this.getFieldOfStudy())
-                .department(this.getDepartment())
-                .degreeOfStudy(DegreeOfStudy.valueOf(this.getDegreeOfStudy()))
-                .studentFirstName(this.getStudentFirstName())
-                .studentLastName(this.getStudentLastName())
-                .studentDateOfBirth(this.getStudentDateOfBirth())
-                .studentPeriodOfStudyFrom(this.getStudentPeriodOfStudyFrom())
-                .studentPeriodOfStudyUntil(this.getStudentPeriodOfStudyUntil())
-                .studentPlaceOfBirth(this.getStudentPlaceOfBirth())
-                .studentNationality(this.getStudentNationality())
-                .studentCurrentAddress(this.getStudentCurrentAddress())
-                .studentPhone(this.getStudentPhone())
-                .studentSex(Sex.valueOf(this.getStudentSex()))
-                .studyCycle(StudyCycle.valueOf(this.getStudyCycle()))
-                .semester(Semester.valueOf(this.getSemester()))
-                .departmentalCoordinatorAcademicTitle(this.getDepartmentalCoordinatorAcademicTitle())
-                .departmentalCoordinatorFirstName(this.getDepartmentalCoordinatorFirstName())
-                .departmentalCoordinatorLastName(this.getDepartmentalCoordinatorLastName())
-                .departmentalCoordinatorPhone(this.getDepartmentalCoordinatorPhone())
-                .departmentalCoordinatorFax(this.getDepartmentalCoordinatorFax())
-                .departmentalCoordinatorEmail(this.getDepartmentalCoordinatorEmail())
-                .photoBlob(this.getPhotoBlob())
-                .build();
-    }
 }

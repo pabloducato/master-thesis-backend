@@ -56,19 +56,4 @@ public class User implements Serializable {
     @Column(name = "PHOTO_CONTENT_TYPE", length = 50)
     private String photoContentType;
 
-    public UserDTO mapToDTO() {
-        return UserDTO.builder()
-                .id(this.getId())
-                .email(this.getEmail())
-                .password(this.getPassword())
-                .firstName(this.getFirstName())
-                .lastName(this.getLastName())
-                .status(this.getStatus())
-                .role(this.getRole())
-                .photoBlob(this.getPhotoBlob())
-                .photoContentLength(this.getPhotoContentLength())
-                .photoContentType(this.getPhotoContentType())
-                .build();
-    }
-
 }

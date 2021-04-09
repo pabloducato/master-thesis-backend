@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.edu.prz.master.thesis.backend.entity.Course;
-import pl.edu.prz.master.thesis.backend.entity.CourseCoordinator;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,15 +42,4 @@ public class CourseCoordinatorDTO implements Serializable {
     @ApiModelProperty(notes = "The course coordinator's course ids")
     private List<Course> courses;
 
-    public CourseCoordinator parseCourseCoordinator() {
-        return CourseCoordinator.builder()
-                .courseCoordinatorEmail(this.getCourseCoordinatorEmail())
-                .courseCoordinatorAcademicTitle(this.getCourseCoordinatorAcademicTitle())
-                .courseCoordinatorFirstName(this.getCourseCoordinatorFirstName())
-                .courseCoordinatorLastName(this.getCourseCoordinatorLastName())
-                .courseCoordinatorPhone(this.getCourseCoordinatorPhone())
-                .courseCoordinatorFax(this.getCourseCoordinatorFax())
-                .courses(this.getCourses())
-                .build();
-    }
 }

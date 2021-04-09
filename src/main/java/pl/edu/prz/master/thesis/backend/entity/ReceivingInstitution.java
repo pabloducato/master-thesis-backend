@@ -46,18 +46,4 @@ public class ReceivingInstitution implements Serializable {
     @Column(name = "RECEIVING_INSTITUTION_FAX", nullable = false)
     private String receivingInstitutionFax = "+48178541260";
 
-    public ReceivingInstitutionDTO mapToDTO() {
-        return ReceivingInstitutionDTO.builder()
-                .id(this.getId())
-                .receivingInstitutionEmail(this.getReceivingInstitutionEmail())
-                .receivingInstitutionName(this.getReceivingInstitutionName())
-                .receivingInstitutionPatron(this.getReceivingInstitutionPatron())
-                .receivingInstitutionWhere(this.getReceivingInstitutionWhere())
-                .receivingInstitutionAddress(this.getReceivingInstitutionAddress())
-                .receivingInstitutionPostCode(this.getReceivingInstitutionPostCode())
-                .receivingInstitutionCountry(this.getReceivingInstitutionCountry())
-                .receivingInstitutionPhone(this.getReceivingInstitutionPhone())
-                .receivingInstitutionFax(this.getReceivingInstitutionFax())
-                .build();
-    }
 }
