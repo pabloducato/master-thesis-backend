@@ -18,14 +18,6 @@ public class Course implements Serializable {
     @GeneratedValue(generator = "COURSE_SEQUENCE")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "STUDENT_ID", nullable = false, updatable = false, referencedColumnName = "ID")
-    private Student student;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "COURSE_COORDINATOR_ID", nullable = false, updatable = false, referencedColumnName = "ID")
-    private CourseCoordinator courseCoordinator;
-
     @Column(name = "UNIT_CODE")
     private String unitCode;
 

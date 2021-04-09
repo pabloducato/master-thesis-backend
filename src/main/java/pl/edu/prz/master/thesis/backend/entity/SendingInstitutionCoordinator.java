@@ -18,10 +18,6 @@ public class SendingInstitutionCoordinator implements Serializable {
     @GeneratedValue(generator = "SENDING_INSTITUTION_COORDINATOR_SEQUENCE")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "STUDENT_ID", nullable = false, updatable = false, referencedColumnName = "ID")
-    private Student student;
-
     @Column(name = "SENDING_INSTITUTION_COORDINATOR_EMAIL", nullable = false, unique = true, updatable = false)
     private String sendingInstitutionCoordinatorEmail;
 

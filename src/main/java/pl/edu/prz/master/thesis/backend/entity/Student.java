@@ -87,13 +87,4 @@ public class Student implements Serializable {
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
-    @OneToMany(mappedBy = "student")
-    private List<Course> courses;
-
-    @OneToMany(mappedBy = "student")
-    private List<SendingInstitution> sendingInstitutions;
-
-    @OneToMany(mappedBy = "student")
-    private List<SendingInstitutionCoordinator> sendingInstitutionCoordinators;
-
 }

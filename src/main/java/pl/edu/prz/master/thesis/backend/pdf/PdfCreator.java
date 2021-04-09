@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.vandeseer.easytable.TableDrawer;
+import org.vandeseer.easytable.settings.HorizontalAlignment;
+import org.vandeseer.easytable.settings.VerticalAlignment;
 import org.vandeseer.easytable.structure.Row;
 import org.vandeseer.easytable.structure.Table;
 import org.vandeseer.easytable.structure.cell.CellText;
-import org.vandeseer.easytable.settings.HorizontalAlignment;
-import org.vandeseer.easytable.settings.VerticalAlignment;
 import pl.edu.prz.master.thesis.backend.exception.PDFNotCreatedException;
 import pl.edu.prz.master.thesis.backend.service.StudentServiceImplementation;
 
@@ -31,7 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static pl.edu.prz.master.thesis.backend.pdf.PdfStyle.*;
+import static pl.edu.prz.master.thesis.backend.pdf.PdfStyle.PAGE_FORMAT;
 
 @Component
 @Slf4j

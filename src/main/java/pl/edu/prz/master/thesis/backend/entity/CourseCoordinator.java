@@ -1,7 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import pl.edu.prz.master.thesis.backend.dto.CourseCoordinatorDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,8 +36,5 @@ public class CourseCoordinator implements Serializable {
 
     @Column(name = "COURSE_COORDINATOR_FAX", nullable = false)
     private String courseCoordinatorFax;
-
-    @OneToMany(mappedBy = "courseCoordinator")
-    private List<Course> courses;
 
 }
