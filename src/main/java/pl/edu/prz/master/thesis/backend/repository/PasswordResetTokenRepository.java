@@ -6,9 +6,5 @@ import pl.edu.prz.master.thesis.backend.entity.ResetPasswordEntity;
 
 @Repository
 public interface PasswordResetTokenRepository extends JpaRepository<ResetPasswordEntity, Long> {
-    ResetPasswordEntity findByToken(String token);
 
-    ResetPasswordEntity findByUserId(Long userId);
-
-    boolean existsByUserId(Long id);
 }
