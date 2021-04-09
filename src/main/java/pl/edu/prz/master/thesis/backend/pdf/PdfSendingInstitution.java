@@ -37,5 +37,4 @@ public class PdfSendingInstitution {
     @NotNull
     private String sendingInstitutionFax;
 
-
 }

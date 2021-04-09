@@ -1,7 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
 import pl.edu.prz.master.thesis.backend.enums.Semester;
@@ -12,8 +11,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Getter
 @Setter
