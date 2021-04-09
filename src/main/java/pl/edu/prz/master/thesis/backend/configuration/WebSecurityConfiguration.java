@@ -23,20 +23,20 @@ import pl.edu.prz.master.thesis.backend.repository.UserRepository;
 import pl.edu.prz.master.thesis.backend.security.TokenHelper;
 import pl.edu.prz.master.thesis.backend.security.auth.RestAuthenticationEntryPoint;
 import pl.edu.prz.master.thesis.backend.security.auth.TokenAuthenticationFilter;
-import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsService;
+import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsServiceImplementation;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final CustomUserDetailsService jwtUserDetailsService;
+    private final CustomUserDetailsServiceImplementation jwtUserDetailsService;
     private final TokenHelper tokenHelper;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    public WebSecurityConfiguration(CustomUserDetailsService jwtUserDetailsService, TokenHelper tokenHelper, UserRepository userRepository) {
+    public WebSecurityConfiguration(CustomUserDetailsServiceImplementation jwtUserDetailsService, TokenHelper tokenHelper, UserRepository userRepository) {
         this.jwtUserDetailsService = jwtUserDetailsService;
         this.tokenHelper = tokenHelper;
         this.userRepository = userRepository;

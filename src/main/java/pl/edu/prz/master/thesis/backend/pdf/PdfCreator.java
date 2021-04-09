@@ -19,7 +19,7 @@ import org.vandeseer.easytable.structure.cell.CellText;
 import org.vandeseer.easytable.settings.HorizontalAlignment;
 import org.vandeseer.easytable.settings.VerticalAlignment;
 import pl.edu.prz.master.thesis.backend.exception.PDFNotCreatedException;
-import pl.edu.prz.master.thesis.backend.service.StudentService;
+import pl.edu.prz.master.thesis.backend.service.StudentServiceImplementation;
 
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +40,7 @@ public class PdfCreator {
     private PdfStyle style;
 
     @Autowired
-    private StudentService studentService;
+    private StudentServiceImplementation studentServiceImplementation;
 
     @Autowired
     private ResourceLoader resourceLoader;

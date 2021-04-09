@@ -9,11 +9,11 @@ import pl.edu.prz.master.thesis.backend.entity.UserDetailsEntity;
 import pl.edu.prz.master.thesis.backend.repository.UserRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImplementation implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public CustomUserDetailsServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
