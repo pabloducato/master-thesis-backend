@@ -36,7 +36,7 @@ public class CourseService {
     }
 
     public CourseDTO getCourseByName(String name) {
-        return courseRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("Unable to find course with name " + name)).mapToDTO();
+        return courseRepository.findByCourseName(name).orElseThrow(() -> new EntityNotFoundException("Unable to find course with name " + name)).mapToDTO();
     }
 
     public void createCourse(Course course) {
@@ -44,10 +44,6 @@ public class CourseService {
     }
 
     private Course fillEntity(Course course) {
-        course.setCourseCoordinators(course.getCourseCoordinatorIds()
-                .stream()
-                .map(courseCoordinatorRepository::getOne)
-                .collect(Collectors.toSet()));
         return course;
     }
 

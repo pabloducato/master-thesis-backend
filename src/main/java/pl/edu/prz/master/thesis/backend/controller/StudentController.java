@@ -33,15 +33,15 @@ public class StudentController {
         this.studentRepository = studentRepository;
     }
 
-    @GetMapping("/{id}/courses")
-    public List<CourseDTO> getStudentCoursesById(@PathVariable Long id) {
-        return studentService.getStudentCoursesById(id);
-    }
-
-    @GetMapping("/{id}/sending_institutions")
-    public List<SendingInstitutionDTO> getStudentSendingInstitutionsById(@PathVariable Long id) {
-        return studentService.getStudentSendingInstitutionsById(id);
-    }
+//    @GetMapping("/{id}/courses")
+//    public List<CourseDTO> getStudentCoursesById(@PathVariable Long id) {
+//        return studentService.getStudentCoursesById(id);
+//    }
+//
+//    @GetMapping("/{id}/sending_institutions")
+//    public List<SendingInstitutionDTO> getStudentSendingInstitutionsById(@PathVariable Long id) {
+//        return studentService.getStudentSendingInstitutionsById(id);
+//    }
 
     @GetMapping
     public List<StudentDTO> getStudent(@RequestParam(name = "studentEmail", required = false) String studentEmail) {

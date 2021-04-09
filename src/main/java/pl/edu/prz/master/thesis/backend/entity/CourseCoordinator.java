@@ -38,7 +38,7 @@ public class CourseCoordinator implements Serializable {
     @Column(name = "COURSE_COORDINATOR_FAX", nullable = false)
     private String courseCoordinatorFax;
 
-    @OneToMany(mappedBy = "course_coordinator")
+    @OneToMany(mappedBy = "courseCoordinator")
     private List<Course> courses;
 
 

@@ -37,21 +37,22 @@ public class CourseController {
         return courseService.getCourseById(id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
+
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     @ResponseStatus(HttpStatus.CREATED)
     public void createCourse(@Valid @RequestBody CourseDTO courseDTO) {
         courseService.createCourse(courseDTO.parseCourse());
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     public void updateOrAddCourse(@Valid @RequestBody CourseDTO courseDTO, @PathVariable("id") Long id) {
         courseService.updateOrAddCourse(courseDTO.parseCourse(), id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCourse(@PathVariable("id") Long id) {
         courseService.deactivateCourse(id);

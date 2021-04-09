@@ -54,40 +54,32 @@ public class StudentService {
     }
 
     private Student fillEntity(Student student) {
-        student.setCourses(student.getCourseIds()
-                .stream()
-                .map(courseRepository::getOne)
-                .collect(Collectors.toSet()));
-        student.setSendingInstitutions(student.getSendingInstitutionIds()
-                .stream()
-                .map(sendingInstitutionRepository::getOne)
-                .collect(Collectors.toSet()));
         return student;
     }
 
-    public List<CourseDTO> getStudentCoursesById(Long id) {
-        if (!studentRepository.existsById(id)) {
-            throw new EntityNotFoundException("Unable to find com.example.erasmus.model.Student with id " + id);
-        }
-        Student student = studentRepository.getOne(id);
-
-        return courseRepository.findByStudentsContaining(student)
-                .stream()
-                .map(Course::mapToDTO)
-                .collect(Collectors.toList());
-    }
-
-    public List<SendingInstitutionDTO> getStudentSendingInstitutionsById(Long id) {
-        if (!studentRepository.existsById(id)) {
-            throw new EntityNotFoundException("Unable to find com.example.erasmus.model.Student with id " + id);
-        }
-        Student student = studentRepository.getOne(id);
-
-        return sendingInstitutionRepository.findByStudentsContaining(student)
-                .stream()
-                .map(SendingInstitution::mapToDTO)
-                .collect(Collectors.toList());
-    }
+//    public List<CourseDTO> getStudentCoursesById(Long id) {
+//        if (!studentRepository.existsById(id)) {
+//            throw new EntityNotFoundException("Unable to find com.example.erasmus.model.Student with id " + id);
+//        }
+//        Student student = studentRepository.getOne(id);
+//
+//        return courseRepository.findByStudentContaining(student)
+//                .stream()
+//                .map(Course::mapToDTO)
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<SendingInstitutionDTO> getStudentSendingInstitutionsById(Long id) {
+//        if (!studentRepository.existsById(id)) {
+//            throw new EntityNotFoundException("Unable to find com.example.erasmus.model.Student with id " + id);
+//        }
+//        Student student = studentRepository.getOne(id);
+//
+//        return sendingInstitutionRepository.findByStudentContaining(student)
+//                .stream()
+//                .map(SendingInstitution::mapToDTO)
+//                .collect(Collectors.toList());
+//    }
 
     public void updateOrAddStudent(Student student, Long id) {
         student.setId(id);
