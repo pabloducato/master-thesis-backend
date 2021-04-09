@@ -1,7 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import pl.edu.prz.master.thesis.backend.dto.CourseDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,28 +26,28 @@ public class Course implements Serializable {
     @JoinColumn(name = "COURSE_COORDINATOR_ID", nullable = false, updatable = false, referencedColumnName = "ID")
     private CourseCoordinator courseCoordinator;
 
-    @Column(name = "COURSE_UNIT_CODE")
-    private String courseUnitCode;
+    @Column(name = "UNIT_CODE")
+    private String unitCode;
 
-    @Column(name = "COURSE_NAME", nullable = false, unique = true, updatable = false)
-    private String courseName;
+    @Column(name = "NAME", nullable = false, unique = true, updatable = false)
+    private String name;
 
-    @Column(name = "COURSE_DURATION_OF_UNIT", nullable = false)
-    private String courseDurationOfUnit;
+    @Column(name = "DURATION_OF_UNIT", nullable = false)
+    private String durationOfUnit;
 
-    @Column(name = "COURSE_CREDITS", nullable = false)
-    private Long courseCredits;
+    @Column(name = "CREDITS", nullable = false)
+    private Long credits;
 
-    @Column(name = "COURSE_IS_ACTIVE")
-    private boolean courseActive;
+    @Column(name = "WHETHER_ACTIVE")
+    private boolean whetherActive;
 
-    @Column(name = "COURSE_SEMESTER", nullable = false)
-    private String courseSemester;
+    @Column(name = "SEMESTER", nullable = false)
+    private String semester;
 
-    @Column(name = "COURSE_DEPARTMENT", nullable = false)
-    private String courseDepartment;
+    @Column(name = "DEPARTMENT", nullable = false)
+    private String department;
 
-    @Column(name = "COURSE_NUMBER_OF_HOURS", nullable = false)
-    private String courseNumberOfHours;
+    @Column(name = "NUMBER_OF_HOURS", nullable = false)
+    private String numberOfHours;
 
 }

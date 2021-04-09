@@ -2,7 +2,6 @@ package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
 import org.hibernate.annotations.Type;
-import pl.edu.prz.master.thesis.backend.dto.UserDTO;
 import pl.edu.prz.master.thesis.backend.enums.Role;
 import pl.edu.prz.master.thesis.backend.enums.Status;
 

@@ -23,28 +23,28 @@ public class CourseDTO implements Serializable {
     private Long id;
 
     @ApiModelProperty(notes = "The course's unit code")
-    private String courseUnitCode;
+    private String unitCode;
 
     @ApiModelProperty(notes = "The course's name")
-    private String courseName;
+    private String name;
 
     @ApiModelProperty(notes = "The course's duration of unit")
-    private String courseDurationOfUnit;
+    private String durationOfUnit;
 
     @ApiModelProperty(notes = "The course's credits")
-    private Long courseCredits;
+    private Long credits;
 
     @ApiModelProperty(notes = "The course whether is active")
-    private boolean courseActive;
+    private boolean active;
 
     @ApiModelProperty(notes = "The course's semester'")
-    private String courseSemester;
+    private String semester;
 
     @ApiModelProperty(notes = "The course's department'")
-    private String courseDepartment;
+    private String department;
 
     @ApiModelProperty(notes = "The course's department'")
-    private String courseNumberOfHours;
+    private String numberOfHours;
 
     @ApiModelProperty(notes = "The course's student ids'")
     private List<Student> courseStudents;

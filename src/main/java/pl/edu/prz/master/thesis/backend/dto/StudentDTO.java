@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
+import pl.edu.prz.master.thesis.backend.enums.Sex;
+import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,76 +24,58 @@ public class StudentDTO implements Serializable {
     private Long id;
 
     @ApiModelProperty(notes = "The student's email")
-    private String studentEmail;
-
-    @ApiModelProperty(notes = "The student's academic year")
-    private String studentAcademicYear;
-
-    @ApiModelProperty(notes = "The student's field of study")
-    private String studentFieldOfStudy;
-
-    @ApiModelProperty(notes = "The student's department")
-    private String studentDepartment;
-
-    @ApiModelProperty(notes = "The student's degree of study")
-    private String studentDegreeOfStudy;
-
-    @ApiModelProperty(notes = "The student's semester")
-    private String studentSemester;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator academic title")
-    private String departmentalCoordinatorAcademicTitle;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator first name")
-    private String departmentalCoordinatorFirstName;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator last name")
-    private String departmentalCoordinatorLastName;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator phone")
-    private String departmentalCoordinatorPhone;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator fax")
-    private String departmentalCoordinatorFax;
-
-    @ApiModelProperty(notes = "The student's departmental coordinator email")
-    private String departmentalCoordinatorEmail;
+    private String email;
 
     @ApiModelProperty(notes = "The student's matriculation number")
-    private Long studentMatriculationNumber;
+    private Long matriculationNumber;
+
+    @ApiModelProperty(notes = "The student's academic year")
+    private String academicYear;
+
+    @ApiModelProperty(notes = "The student's field of study")
+    private String fieldOfStudy;
+
+    @ApiModelProperty(notes = "The student's department")
+    private String department;
+
+    @ApiModelProperty(notes = "The student's degree of study")
+    private DegreeOfStudy degreeOfStudy;
+
+    @ApiModelProperty(notes = "The student's semester")
+    private String semester;
 
     @ApiModelProperty(notes = "The student's first name")
-    private String studentFirstName;
+    private String firstName;
 
     @ApiModelProperty(notes = "The student's last name")
-    private String studentLastName;
+    private String lastName;
 
     @ApiModelProperty(notes = "The student's date of birth")
-    private Date studentDateOfBirth;
+    private Date dateOfBirth;
 
     @ApiModelProperty(notes = "The student's period of study from")
-    private Date studentPeriodOfStudyFrom;
+    private Date periodOfStudyFrom;
 
     @ApiModelProperty(notes = "The student's period of study until")
-    private Date studentPeriodOfStudyUntil;
+    private Date periodOfStudyUntil;
 
     @ApiModelProperty(notes = "The student's place of birth")
-    private String studentPlaceOfBirth;
+    private String placeOfBirth;
 
     @ApiModelProperty(notes = "The student's nationality")
-    private String studentNationality;
+    private String nationality;
 
     @ApiModelProperty(notes = "The student's current address")
-    private String studentCurrentAddress;
+    private String currentAddress;
 
     @ApiModelProperty(notes = "The student's phone")
-    private String studentPhone;
+    private String phone;
 
     @ApiModelProperty(notes = "The student's sex")
-    private String studentSex;
+    private Sex sex;
 
     @ApiModelProperty(notes = "The student's study cycle")
-    private String studyCycle;
+    private StudyCycle studyCycle;
 
     @ApiModelProperty(notes = "The student's photo blob")
     private byte[] photoBlob;

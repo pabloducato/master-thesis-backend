@@ -1,7 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
-import pl.edu.prz.master.thesis.backend.dto.SendingInstitutionDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;

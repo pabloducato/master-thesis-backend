@@ -58,44 +58,45 @@ CREATE TABLE USERS
 CREATE TABLE STUDENTS
 (
     ID                                      bigint DEFAULT NEXTVAL('STUDENT_SEQUENCE') PRIMARY KEY,
-    STUDENT_EMAIL                           varchar(255) UNIQUE NOT NULL,
-    STUDENT_MATRICULATION_NUMBER            bigint              NOT NULL,
-    STUDENT_ACADEMIC_YEAR                   varchar(255)        NOT NULL,
-    STUDENT_FIELD_OF_STUDY                  varchar(255)        NOT NULL,
-    STUDENT_DEPARTMENT                      varchar(255)        NOT NULL,
-    STUDENT_DEGREE_OF_STUDY                 varchar(255)        NOT NULL,
-    STUDENT_SEMESTER                        varchar(255)        NOT NULL,
+    EMAIL                                   varchar(255) UNIQUE NOT NULL,
+    MATRICULATION_NUMBER                    bigint              NOT NULL,
+    ACADEMIC_YEAR                           varchar(255)        NOT NULL,
+    FIELD_OF_STUDY                          varchar(255)        NOT NULL,
+    DEPARTMENT                              varchar(255)        NOT NULL,
+    DEGREE_OF_STUDY                         varchar(255)        NOT NULL,
+    SEMESTER                                varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_ACADEMIC_TITLE varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_FIRST_NAME     varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_LAST_NAME      varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_PHONE          varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_FAX            varchar(255)        NOT NULL,
     DEPARTMENTAL_COORDINATOR_EMAIL          varchar(255)        NOT NULL,
-    STUDENT_FIRST_NAME                      varchar(255)        NOT NULL,
-    STUDENT_LAST_NAME                       varchar(255)        NOT NULL,
-    STUDENT_DATE_OF_BIRTH                   date                NOT NULL,
-    STUDENT_PERIOD_OF_STUDY_FROM            date                NOT NULL,
-    STUDENT_PERIOD_OF_STUDY_UNTIL           date                NOT NULL,
-    STUDENT_PLACE_OF_BIRTH                  varchar(255)        NOT NULL,
-    STUDENT_NATIONALITY                     varchar(255)        NOT NULL,
-    STUDENT_CURRENT_ADDRESS                 varchar(255)        NOT NULL,
-    STUDENT_PHONE                           varchar(255)        NOT NULL,
-    STUDENT_SEX                             varchar(255)        NOT NULL,
+    FIRST_NAME                              varchar(255)        NOT NULL,
+    LAST_NAME                               varchar(255)        NOT NULL,
+    DATE_OF_BIRTH                           date                NOT NULL,
+    PERIOD_OF_STUDY_FROM                    date                NOT NULL,
+    PERIOD_OF_STUDY_UNTIL                   date                NOT NULL,
+    PLACE_OF_BIRTH                          varchar(255)        NOT NULL,
+    NATIONALITY                             varchar(255)        NOT NULL,
+    CURRENT_ADDRESS                         varchar(255)        NOT NULL,
+    PHONE                                   varchar(255)        NOT NULL,
+    SEX                                     varchar(255)        NOT NULL,
     STUDY_CYCLE                             varchar(255)        NOT NULL,
-    STUDENT_PHOTO_BLOB                      bytea
+    PHOTO_BLOB                              bytea
 );
 
 CREATE TABLE COURSES
 (
-    ID                      bigint DEFAULT NEXTVAL('COURSE_SEQUENCE') PRIMARY KEY,
-    COURSE_UNIT_CODE        varchar(255) NOT NULL,
-    COURSE_NAME             varchar(255) NOT NULL,
-    COURSE_DURATION_OF_UNIT varchar(255) NOT NULL,
-    COURSE_CREDITS          bigint       NOT NULL,
-    COURSE_IS_ACTIVE        boolean,
-    COURSE_SEMESTER         varchar(255) NOT NULL,
-    COURSE_DEPARTMENT       varchar(255) NOT NULL,
-    COURSE_NUMBER_OF_HOURS  varchar(255) NOT NULL,
+    ID               bigint DEFAULT NEXTVAL('COURSE_SEQUENCE') PRIMARY KEY,
+    UNIT_CODE        varchar(255) NOT NULL,
+    NAME             varchar(255) NOT NULL,
+    DURATION_OF_UNIT varchar(255) NOT NULL,
+    CREDITS          bigint       NOT NULL,
+    WHETHER_ACTIVE   boolean,
+    SEMESTER         varchar(255) NOT NULL,
+    DEPARTMENT       varchar(255) NOT NULL,
+    NUMBER_OF_HOURS  varchar(255) NOT NULL,
+    STUDENT_ID       bigint       NOT NULL,
     FOREIGN KEY (STUDENT_ID)
         REFERENCES STUDENTS (ID)
 );
@@ -135,15 +136,4 @@ CREATE TABLE SENDING_INSTITUTIONS
     SENDING_INSTITUTION_COUNTRY   varchar(255)        NOT NULL,
     SENDING_INSTITUTION_PHONE     varchar(255)        NOT NULL,
     SENDING_INSTITUTION_FAX       varchar(255)        NOT NULL
-);
-
-CREATE TABLE SENDING_INSTITUTION_COORDINATORS
-(
-    ID                                             bigint DEFAULT NEXTVAL('SENDING_INSTITUTION_COORDINATOR_SEQUENCE') PRIMARY KEY,
-    SENDING_INSTITUTION_COORDINATOR_EMAIL          varchar(255) UNIQUE NOT NULL,
-    SENDING_INSTITUTION_COORDINATOR_ACADEMIC_TITLE varchar(255)        NOT NULL,
-    SENDING_INSTITUTION_COORDINATOR_FIRST_NAME     varchar(255)        NOT NULL,
-    SENDING_INSTITUTION_COORDINATOR_LAST_NAME      varchar(255)        NOT NULL,
-    SENDING_INSTITUTION_COORDINATOR_PHONE          varchar(255)        NOT NULL,
-    SENDING_INSTITUTION_COORDINATOR_FAX            varchar(255)        NOT NULL,
 );

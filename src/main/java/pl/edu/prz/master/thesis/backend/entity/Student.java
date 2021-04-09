@@ -2,7 +2,6 @@ package pl.edu.prz.master.thesis.backend.entity;
 
 import lombok.*;
 import org.hibernate.annotations.Type;
-import pl.edu.prz.master.thesis.backend.dto.StudentDTO;
 import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
 import pl.edu.prz.master.thesis.backend.enums.Semester;
 import pl.edu.prz.master.thesis.backend.enums.Sex;
@@ -26,65 +25,65 @@ public class Student implements Serializable {
     @GeneratedValue(generator = "STUDENT_SEQUENCE")
     private Long id;
 
-    @Column(name = "STUDENT_EMAIL", nullable = false, unique = true, updatable = false)
-    private String studentEmail;
+    @Column(name = "EMAIL", nullable = false, unique = true, updatable = false)
+    private String email;
 
-    @Column(name = "STUDENT_MATRICULATION_NUMBER", nullable = false)
-    private Long studentMatriculationNumber;
+    @Column(name = "MATRICULATION_NUMBER", nullable = false)
+    private Long matriculationNumber;
 
-    @Column(name = "STUDENT_ACADEMIC_YEAR", nullable = false)
-    private String studentAcademicYear;
+    @Column(name = "ACADEMIC_YEAR", nullable = false)
+    private String academicYear;
 
-    @Column(name = "STUDENT_FIELD_OF_STUDY", nullable = false)
-    private String studentFieldOfStudy;
+    @Column(name = "FIELD_OF_STUDY", nullable = false)
+    private String fieldOfStudy;
 
-    @Column(name = "STUDENT_DEPARTMENT", nullable = false)
-    private String studentDepartment;
+    @Column(name = "DEPARTMENT", nullable = false)
+    private String department;
 
-    @Column(name = "STUDENT_DEGREE_OF_STUDY", nullable = false)
+    @Column(name = "DEGREE_OF_STUDY", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DegreeOfStudy studentDegreeOfStudy;
+    private DegreeOfStudy degreeOfStudy;
 
-    @Column(name = "STUDENT_SEMESTER", nullable = false)
+    @Column(name = "SEMESTER", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Semester studentSemester;
+    private Semester semester;
 
-    @Column(name = "STUDENT_FIRST_NAME", nullable = false)
-    private String studentFirstName;
+    @Column(name = "FIRST_NAME", nullable = false)
+    private String firstName;
 
     @Column(name = "STUDENT_LAST_NAME", nullable = false)
-    private String studentLastName;
+    private String lastName;
 
-    @Column(name = "STUDENT_DATE_OF_BIRTH", nullable = false)
-    private Date studentDateOfBirth;
+    @Column(name = "DATE_OF_BIRTH", nullable = false)
+    private Date dateOfBirth;
 
-    @Column(name = "STUDENT_PERIOD_OF_STUDY_FROM", nullable = false)
-    private Date studentPeriodOfStudyFrom;
+    @Column(name = "PERIOD_OF_STUDY_FROM", nullable = false)
+    private Date periodOfStudyFrom;
 
-    @Column(name = "STUDENT_PERIOD_OF_STUDY_UNTIL", nullable = false)
-    private Date studentPeriodOfStudyUntil;
+    @Column(name = "PERIOD_OF_STUDY_UNTIL", nullable = false)
+    private Date periodOfStudyUntil;
 
-    @Column(name = "STUDENT_PLACE_OF_BIRTH", nullable = false)
-    private String studentPlaceOfBirth;
+    @Column(name = "PLACE_OF_BIRTH", nullable = false)
+    private String placeOfBirth;
 
-    @Column(name = "STUDENT_NATIONALITY", nullable = false)
-    private String studentNationality;
+    @Column(name = "NATIONALITY", nullable = false)
+    private String nationality;
 
-    @Column(name = "STUDENT_CURRENT_ADDRESS", nullable = false)
-    private String studentCurrentAddress;
+    @Column(name = "CURRENT_ADDRESS", nullable = false)
+    private String currentAddress;
 
-    @Column(name = "STUDENT_PHONE", nullable = false)
-    private String studentPhone;
+    @Column(name = "PHONE", nullable = false)
+    private String phone;
 
-    @Column(name = "STUDENT_SEX", nullable = false)
+    @Column(name = "SEX", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Sex studentSex = Sex.HIDDEN;
+    private Sex sex = Sex.HIDDEN;
 
     @Column(name = "STUDY_CYCLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private StudyCycle studyCycle;
 
-    @Column(name = "STUDENT_PHOTO_BLOB")
+    @Column(name = "PHOTO_BLOB")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
