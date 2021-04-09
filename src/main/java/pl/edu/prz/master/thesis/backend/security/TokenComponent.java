@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 @Component
-public class TokenHelper {
+public class TokenComponent {
 
     @Value("${app.name}")
     private String appName;

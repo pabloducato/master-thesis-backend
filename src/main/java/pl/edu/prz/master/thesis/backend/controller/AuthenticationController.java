@@ -9,8 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.prz.master.thesis.backend.entity.UserTokenEntity;
-import pl.edu.prz.master.thesis.backend.security.TokenHelper;
+import pl.edu.prz.master.thesis.backend.entity.UserAccessToken;
+import pl.edu.prz.master.thesis.backend.security.TokenComponent;
 import pl.edu.prz.master.thesis.backend.security.auth.JwtAuthenticationRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,18 +22,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Api(tags = "Authentication Controller")
 public class AuthenticationController {
 
-    private final TokenHelper tokenHelper;
+    private final TokenComponent tokenComponent;
 
     @Lazy
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationController(TokenHelper tokenHelper, AuthenticationManager authenticationManager) {
-        this.tokenHelper = tokenHelper;
+    public AuthenticationController(TokenComponent tokenComponent, AuthenticationManager authenticationManager) {
+        this.tokenComponent = tokenComponent;
         this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/login")
-    public UserTokenEntity createAuthenticationToken(
+    public UserAccessToken createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest
     ) throws AuthenticationException {
         final Authentication authentication = authenticationManager.authenticate(
@@ -45,16 +45,16 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails user = (UserDetails) authentication.getPrincipal();
-        String token = tokenHelper.generateToken(user.getUsername(), user.getAuthorities());
-        return new UserTokenEntity(token);
+        String token = tokenComponent.generateToken(user.getUsername(), user.getAuthorities());
+        return new UserAccessToken(token);
     }
 
     @GetMapping("/refresh")
-    public UserTokenEntity refreshAuthenticationToken(
+    public UserAccessToken refreshAuthenticationToken(
             HttpServletRequest request
     ) {
-        String authToken = tokenHelper.getToken(request);
-        String refreshedToken = tokenHelper.refreshToken(authToken);
-        return new UserTokenEntity(refreshedToken);
+        String authToken = tokenComponent.getToken(request);
+        String refreshedToken = tokenComponent.refreshToken(authToken);
+        return new UserAccessToken(refreshedToken);
     }
 }

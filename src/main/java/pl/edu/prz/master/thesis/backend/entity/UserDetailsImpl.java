@@ -11,13 +11,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Getter
-public class UserDetailsEntity implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     private final Long id;
     private final String password;
     private final List<GrantedAuthority> authorities;
     private final boolean enabled;
 
-    public UserDetailsEntity(User user) {
+    public UserDetailsImpl(User user) {
         this.id = user.getId();
         this.password = user.getPassword();
         this.authorities = new LinkedList<>();

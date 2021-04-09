@@ -27,7 +27,7 @@ public class ReceivingInstitutionDTO {
     private String patron;
 
     @ApiModelProperty(notes = "The receiving institution's where")
-    private String where;
+    private String whereFrom;
 
     @ApiModelProperty(notes = "The receiving institution's address")
     private String address;

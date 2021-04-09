@@ -20,7 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pl.edu.prz.master.thesis.backend.repository.UserRepository;
-import pl.edu.prz.master.thesis.backend.security.TokenHelper;
+import pl.edu.prz.master.thesis.backend.security.TokenComponent;
 import pl.edu.prz.master.thesis.backend.security.auth.RestAuthenticationEntryPoint;
 import pl.edu.prz.master.thesis.backend.security.auth.TokenAuthenticationFilter;
 import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsServiceImplementation;
@@ -31,14 +31,14 @@ import pl.edu.prz.master.thesis.backend.service.CustomUserDetailsServiceImplemen
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsServiceImplementation jwtUserDetailsService;
-    private final TokenHelper tokenHelper;
+    private final TokenComponent tokenComponent;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    public WebSecurityConfiguration(CustomUserDetailsServiceImplementation jwtUserDetailsService, TokenHelper tokenHelper, UserRepository userRepository) {
+    public WebSecurityConfiguration(CustomUserDetailsServiceImplementation jwtUserDetailsService, TokenComponent tokenComponent, UserRepository userRepository) {
         this.jwtUserDetailsService = jwtUserDetailsService;
-        this.tokenHelper = tokenHelper;
+        this.tokenComponent = tokenComponent;
         this.userRepository = userRepository;
     }
 
@@ -91,7 +91,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
-                        new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService, userRepository, authenticationEntryPoint()), BasicAuthenticationFilter.class);
+                        new TokenAuthenticationFilter(tokenComponent, jwtUserDetailsService, userRepository, authenticationEntryPoint()), BasicAuthenticationFilter.class);
     }
 
     @Bean

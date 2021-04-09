@@ -9,7 +9,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pl.edu.prz.master.thesis.backend.entity.User;
 import pl.edu.prz.master.thesis.backend.repository.UserRepository;
-import pl.edu.prz.master.thesis.backend.security.TokenHelper;
+import pl.edu.prz.master.thesis.backend.security.TokenComponent;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -21,13 +21,13 @@ import java.util.Date;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-    private final TokenHelper tokenHelper;
+    private final TokenComponent tokenComponent;
     private final UserDetailsService userDetailsService;
     private final UserRepository userRepository;
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
-    public TokenAuthenticationFilter(TokenHelper tokenHelper, UserDetailsService userDetailsService, UserRepository userRepository, AuthenticationEntryPoint authenticationEntryPoint) {
-        this.tokenHelper = tokenHelper;
+    public TokenAuthenticationFilter(TokenComponent tokenComponent, UserDetailsService userDetailsService, UserRepository userRepository, AuthenticationEntryPoint authenticationEntryPoint) {
+        this.tokenComponent = tokenComponent;
         this.userDetailsService = userDetailsService;
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.userRepository = userRepository;
@@ -41,13 +41,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     ) throws IOException, ServletException {
 
         if (!(request.getRequestURI().equals("/auth/login") || request.getRequestURI().contains("/reset_password"))) {
-            String token = tokenHelper.getToken(request);
+            String token = tokenComponent.getToken(request);
             if (token != null) {
                 Long id;
                 try {
                     id = getIdFromToken(token);
                     User user = userRepository.findById(id).get();
-                    Date issuedDate = tokenHelper.getIssuedAtFromToken(token);
+                    Date issuedDate = tokenComponent.getIssuedAtFromToken(token);
                     Date lastPasswordModified = user.getLastPasswordModified();
                     if (lastPasswordModified != null && issuedDate.before(lastPasswordModified))
                         throw new AuthenticationServiceException("Password was changed and token is out of date.");
@@ -72,7 +72,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private Long getIdFromToken(String token) throws AuthenticationException {
         try {
-            return tokenHelper.getIdFromToken(token);
+            return tokenComponent.getIdFromToken(token);
         } catch (Exception ex) {
             throw new AuthenticationServiceException("Failed to parse authentication token.", ex);
         }

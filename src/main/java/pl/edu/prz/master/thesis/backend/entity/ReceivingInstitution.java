@@ -27,8 +27,8 @@ public class ReceivingInstitution implements Serializable {
     @Column(name = "PATRON", nullable = false)
     private String patron = "im. Ignacego Łukasiewicza";
 
-    @Column(name = "WHERE", nullable = false)
-    private String where = "w Rzeszowie";
+    @Column(name = "WHERE_FROM", nullable = false)
+    private String whereFrom = "w Rzeszowie";
 
     @Column(name = "ADDRESS", nullable = false)
     private String address = "Aleja Powstańców Warszawy 12";
