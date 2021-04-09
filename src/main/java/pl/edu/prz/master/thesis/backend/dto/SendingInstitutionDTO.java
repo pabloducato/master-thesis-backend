@@ -18,24 +18,24 @@ public class SendingInstitutionDTO {
     private Long id;
 
     @ApiModelProperty(notes = "The sending institution's email")
-    private String sendingInstitutionEmail;
+    private String email;
 
     @ApiModelProperty(notes = "The sending institution's name")
-    private String sendingInstitutionName;
+    private String name;
 
     @ApiModelProperty(notes = "The sending institution's address")
-    private String sendingInstitutionAddress;
+    private String address;
 
     @ApiModelProperty(notes = "The sending institution's post code")
-    private String sendingInstitutionPostCode;
+    private String postCode;
 
     @ApiModelProperty(notes = "The sending institution's country")
-    private String sendingInstitutionCountry;
+    private String country;
 
     @ApiModelProperty(notes = "The sending institution's phone")
-    private String sendingInstitutionPhone;
+    private String phone;
 
     @ApiModelProperty(notes = "The sending institution's fax")
-    private String sendingInstitutionFax;
+    private String fax;
 
 }

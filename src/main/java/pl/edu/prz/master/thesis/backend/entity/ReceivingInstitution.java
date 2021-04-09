@@ -18,31 +18,31 @@ public class ReceivingInstitution implements Serializable {
     @GeneratedValue(generator = "RECEIVING_INSTITUTION_SEQUENCE")
     private Long id;
 
-    @Column(name = "RECEIVING_INSTITUTION_EMAIL", nullable = false, unique = true, updatable = false)
-    private String receivingInstitutionEmail = "kancelaria@prz.edu.pl";
+    @Column(name = "EMAIL", nullable = false, unique = true, updatable = false)
+    private String email = "kancelaria@prz.edu.pl";
 
-    @Column(name = "RECEIVING_INSTITUTION_NAME", nullable = false)
-    private String receivingInstitutionName = "Politechnika Rzeszowska";
+    @Column(name = "NAME", nullable = false)
+    private String name = "Politechnika Rzeszowska";
 
-    @Column(name = "RECEIVING_INSTITUTION_PATRON", nullable = false)
-    private String receivingInstitutionPatron = "im. Ignacego Łukasiewicza";
+    @Column(name = "PATRON", nullable = false)
+    private String patron = "im. Ignacego Łukasiewicza";
 
-    @Column(name = "RECEIVING_INSTITUTION_WHERE", nullable = false)
-    private String receivingInstitutionWhere = "w Rzeszowie";
+    @Column(name = "WHERE", nullable = false)
+    private String where = "w Rzeszowie";
 
-    @Column(name = "RECEIVING_INSTITUTION_ADDRESS", nullable = false)
-    private String receivingInstitutionAddress = "Aleja Powstańców Warszawy 12";
+    @Column(name = "ADDRESS", nullable = false)
+    private String address = "Aleja Powstańców Warszawy 12";
 
-    @Column(name = "RECEIVING_INSTITUTION_POST_CODE", nullable = false)
-    private String receivingInstitutionPostCode = "35-959 Rzeszów";
+    @Column(name = "POST_CODE", nullable = false)
+    private String postCode = "35-959 Rzeszów";
 
-    @Column(name = "RECEIVING_INSTITUTION_COUNTRY", nullable = false)
-    private String receivingInstitutionCountry = "Poland";
+    @Column(name = "COUNTRY", nullable = false)
+    private String country = "Poland";
 
-    @Column(name = "RECEIVING_INSTITUTION_PHONE", nullable = false)
-    private String receivingInstitutionPhone = "+48178651100";
+    @Column(name = "PHONE", nullable = false)
+    private String phone = "+48178651100";
 
-    @Column(name = "RECEIVING_INSTITUTION_FAX", nullable = false)
-    private String receivingInstitutionFax = "+48178541260";
+    @Column(name = "FAX", nullable = false)
+    private String fax = "+48178541260";
 
 }

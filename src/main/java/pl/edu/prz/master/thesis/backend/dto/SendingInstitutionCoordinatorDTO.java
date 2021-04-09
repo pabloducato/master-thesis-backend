@@ -18,21 +18,21 @@ public class SendingInstitutionCoordinatorDTO {
     private Long id;
 
     @ApiModelProperty(notes = "The sending institution coordinator's email")
-    private String sendingInstitutionCoordinatorEmail;
+    private String email;
 
     @ApiModelProperty(notes = "The sending institution coordinator's academic title")
-    private String sendingInstitutionCoordinatorAcademicTitle;
+    private String academicTitle;
 
     @ApiModelProperty(notes = "The sending institution coordinator's first name")
-    private String sendingInstitutionCoordinatorFirstName;
+    private String firstName;
 
     @ApiModelProperty(notes = "The sending institution coordinator's last name")
-    private String sendingInstitutionCoordinatorLastName;
+    private String lastName;
 
     @ApiModelProperty(notes = "The sending institution coordinator's phone")
-    private String sendingInstitutionCoordinatorPhone;
+    private String phone;
 
     @ApiModelProperty(notes = "The sending institution coordinator's fax")
-    private String sendingInstitutionCoordinatorFax;
+    private String fax;
 
 }

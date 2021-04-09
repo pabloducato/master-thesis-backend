@@ -22,24 +22,21 @@ public class CourseCoordinatorDTO implements Serializable {
     private Long id;
 
     @ApiModelProperty(notes = "The course coordinator's email")
-    private String courseCoordinatorEmail;
+    private String email;
 
     @ApiModelProperty(notes = "The course coordinator's academic title")
-    private String courseCoordinatorAcademicTitle;
+    private String academicTitle;
 
     @ApiModelProperty(notes = "The course coordinator's first name")
-    private String courseCoordinatorFirstName;
+    private String firstName;
 
     @ApiModelProperty(notes = "The course coordinator's last name")
-    private String courseCoordinatorLastName;
+    private String lastName;
 
     @ApiModelProperty(notes = "The course coordinator's phone")
-    private String courseCoordinatorPhone;
+    private String phone;
 
     @ApiModelProperty(notes = "The course coordinator's fax")
-    private String courseCoordinatorFax;
-
-    @ApiModelProperty(notes = "The course coordinator's course ids")
-    private List<Course> courses;
+    private String fax;
 
 }

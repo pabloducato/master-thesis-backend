@@ -23,26 +23,26 @@ public class SendingInstitution implements Serializable {
     @GeneratedValue(generator = "SENDING_INSTITUTION_SEQUENCE")
     private Long id;
 
-    @Column(name = "SENDING_INSTITUTION_EMAIL", nullable = false, unique = true, updatable = false)
-    private String sendingInstitutionEmail;
+    @Column(name = "EMAIL", nullable = false, unique = true, updatable = false)
+    private String email;
 
-    @Column(name = "SENDING_INSTITUTION_NAME", nullable = false)
-    private String sendingInstitutionName;
+    @Column(name = "NAME", nullable = false)
+    private String name;
 
-    @Column(name = "SENDING_INSTITUTION_ADDRESS", nullable = false)
-    private String sendingInstitutionAddress;
+    @Column(name = "ADDRESS", nullable = false)
+    private String address;
 
-    @Column(name = "SENDING_INSTITUTION_POST_CODE", nullable = false)
-    private String sendingInstitutionPostCode;
+    @Column(name = "POST_CODE", nullable = false)
+    private String postCode;
 
-    @Column(name = "SENDING_INSTITUTION_COUNTRY", nullable = false)
-    private String sendingInstitutionCountry;
+    @Column(name = "COUNTRY", nullable = false)
+    private String country;
 
-    @Column(name = "SENDING_INSTITUTION_PHONE", nullable = false)
-    private String sendingInstitutionPhone;
+    @Column(name = "PHONE", nullable = false)
+    private String phone;
 
-    @Column(name = "SENDING_INSTITUTION_FAX", nullable = false)
-    private String sendingInstitutionFax;
+    @Column(name = "FAX", nullable = false)
+    private String fax;
 
     @Nullable
     @Transient

@@ -18,22 +18,22 @@ public class SendingInstitutionCoordinator implements Serializable {
     @GeneratedValue(generator = "SENDING_INSTITUTION_COORDINATOR_SEQUENCE")
     private Long id;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_EMAIL", nullable = false, unique = true, updatable = false)
-    private String sendingInstitutionCoordinatorEmail;
+    @Column(name = "EMAIL", nullable = false, unique = true, updatable = false)
+    private String email;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_ACADEMIC_TITLE", nullable = false)
-    private String sendingInstitutionCoordinatorAcademicTitle;
+    @Column(name = "ACADEMIC_TITLE", nullable = false)
+    private String academicTitle;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_FIRST_NAME", nullable = false)
-    private String sendingInstitutionCoordinatorFirstName;
+    @Column(name = "FIRST_NAME", nullable = false)
+    private String firstName;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_LAST_NAME", nullable = false)
-    private String sendingInstitutionCoordinatorLastName;
+    @Column(name = "LAST_NAME", nullable = false)
+    private String lastName;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_PHONE", nullable = false)
-    private String sendingInstitutionCoordinatorPhone;
+    @Column(name = "PHONE", nullable = false)
+    private String phone;
 
-    @Column(name = "SENDING_INSTITUTION_COORDINATOR_FAX", nullable = false)
-    private String sendingInstitutionCoordinatorFax;
+    @Column(name = "FAX", nullable = false)
+    private String fax;
 
 }
