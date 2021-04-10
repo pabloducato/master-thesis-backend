@@ -12,6 +12,7 @@ import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -79,5 +80,11 @@ public class StudentDTO implements Serializable {
 
     @ApiModelProperty(notes = "The student's photo blob")
     private byte[] photoBlob;
+
+    @ApiModelProperty(notes = "The student's course ids")
+    private List<Long> courseIds;
+
+    @ApiModelProperty(notes = "The student's sending institution ids")
+    private List<Long> sendingInstitutionIds;
 
 }

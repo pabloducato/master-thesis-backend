@@ -1,5 +1,6 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
@@ -91,17 +92,20 @@ public class Student implements Serializable {
     @Transient
     private Set<Long> courseIds = new HashSet<>();
 
-    @Transient
-    private Set<Long> sendingInstitutionIds = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @Column(name = "COURSE_IDS")
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "STUDENT_HAS_COURSES",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private Set<Course> studentCourses;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @Transient
+    private Set<Long> sendingInstitutionIds = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "STUDENT_HAS_SENDING_INSTITUTIONS",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
