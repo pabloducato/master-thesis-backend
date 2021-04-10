@@ -3,19 +3,16 @@ package pl.edu.prz.master.thesis.backend.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.edu.prz.master.thesis.backend.enums.Role;
 import pl.edu.prz.master.thesis.backend.enums.Status;
 
 import java.io.Serializable;
 
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "User object stored in database")
 public class UserDTO implements Serializable {
 

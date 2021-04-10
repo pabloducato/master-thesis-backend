@@ -3,6 +3,7 @@ package pl.edu.prz.master.thesis.backend.controller;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class UserController {
 
     private final UserService userService;
     private final TokenComponent tokenComponent;
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @GetMapping
     public List<UserDTO> getUsers(@RequestParam(name = "email", required = false) String email) {
@@ -45,7 +46,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@Valid @RequestBody UserDTO userDTO) {
         userService.createUser(modelMapper.map(userDTO, User.class));
-        ;
     }
 
     @PreAuthorize("#id == authentication.principal.id")

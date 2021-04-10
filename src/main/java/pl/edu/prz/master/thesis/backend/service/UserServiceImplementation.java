@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,8 @@ public class UserServiceImplementation implements UserService {
     @Override
     public UserDTO getUserById(Long id) {
         if (userRepository.findById(id).isPresent()) {
-            return modelMapper.map(userRepository.findById(id), UserDTO.class);
+            User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Unable to find user with id" + id));
+            return modelMapper.map(user, UserDTO.class);
         } else {
             throw new EntityNotFoundException("User Not Found");
         }
@@ -53,7 +55,8 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public UserDTO getUserByEmail(String email) {
-        return modelMapper.map(userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("Unable to find user with email " + email)), UserDTO.class);
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("Unable to find user with email " + email));
+        return modelMapper.map(user, UserDTO.class);
     }
 
     @Override

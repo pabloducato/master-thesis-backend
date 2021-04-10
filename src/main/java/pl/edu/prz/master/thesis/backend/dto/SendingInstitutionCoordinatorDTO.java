@@ -7,10 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "Sending institution coordinator object stored in database.")
 public class SendingInstitutionCoordinatorDTO {
 

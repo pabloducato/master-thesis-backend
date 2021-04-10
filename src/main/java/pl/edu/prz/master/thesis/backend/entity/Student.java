@@ -10,6 +10,7 @@ import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -51,7 +52,7 @@ public class Student implements Serializable {
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @Column(name = "STUDENT_LAST_NAME", nullable = false)
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
     @Column(name = "DATE_OF_BIRTH", nullable = false)
@@ -86,6 +87,12 @@ public class Student implements Serializable {
     @Column(name = "PHOTO_BLOB")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
+
+    @Transient
+    private Set<Long> courseIds = new HashSet<>();
+
+    @Transient
+    private Set<Long> sendingInstitutionIds = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
