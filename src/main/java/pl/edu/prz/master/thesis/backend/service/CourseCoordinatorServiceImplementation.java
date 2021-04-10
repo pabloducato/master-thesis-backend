@@ -34,6 +34,11 @@ public class CourseCoordinatorServiceImplementation implements CourseCoordinator
     }
 
     @Override
+    public CourseCoordinator fillEntity(CourseCoordinator courseCoordinator) {
+        return null;
+    }
+
+    @Override
     public void updateOrAddCourseCoordinator(CourseCoordinator courseCoordinator, Long id) {
 
     }

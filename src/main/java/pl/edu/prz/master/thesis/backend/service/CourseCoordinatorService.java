@@ -7,20 +7,18 @@ import java.util.List;
 
 public interface CourseCoordinatorService {
 
-    public List<CourseCoordinatorDTO> getCourseCoordinators(String courseCoordinatorEmail);
+    List<CourseCoordinatorDTO> getCourseCoordinators(String courseCoordinatorEmail);
 
-    public CourseCoordinatorDTO getCourseCoordinatorById(Long id);
+    CourseCoordinatorDTO getCourseCoordinatorById(Long id);
 
-    public CourseCoordinatorDTO getCourseCoordinatorByEmail(String courseCoordinatorEmail);
+    CourseCoordinatorDTO getCourseCoordinatorByEmail(String courseCoordinatorEmail);
 
-    public void createCourseCoordinator(CourseCoordinator courseCoordinator);
+    void createCourseCoordinator(CourseCoordinator courseCoordinator);
 
-    private CourseCoordinator fillEntity(CourseCoordinator courseCoordinator) {
-        return courseCoordinator;
-    }
+    CourseCoordinator fillEntity(CourseCoordinator courseCoordinator);
 
-    public void updateOrAddCourseCoordinator(CourseCoordinator courseCoordinator, Long id);
+    void updateOrAddCourseCoordinator(CourseCoordinator courseCoordinator, Long id);
 
-    public void deactivateCourseCoordinator(Long id);
+    void deactivateCourseCoordinator(Long id);
 
 }
