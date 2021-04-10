@@ -3,7 +3,6 @@ package pl.edu.prz.master.thesis.backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +13,7 @@ import java.util.Date;
 @Component
 public class TokenComponent {
 
-    @Value("${app.name}")
-    private String appName;
-
-    @Value("${jwt.secret}")
-    public String secret;
-
-    @Value("${jwt.expires_in}")
-    private int expiresIn;
-
-    @Value("${jwt.header}")
-    private String authHeader;
+    public String secret = "secret";
 
     private static final String TOKEN_PREFIX = "Bearer ";
 
@@ -54,6 +43,7 @@ public class TokenComponent {
     }
 
     public String generateToken(String id, Collection<? extends GrantedAuthority> authorities) {
+        String appName = "Erasmus+ Assistant";
         return Jwts.builder()
                 .setIssuer(appName)
                 .setSubject(id)
@@ -72,10 +62,12 @@ public class TokenComponent {
     }
 
     private Date generateExpirationDate() {
+        int expiresIn = 3600;
         return new Date(new Date().getTime() + expiresIn * 1000);
     }
 
     public String getToken(HttpServletRequest request) {
+        String authHeader = "Authorization";
         String header = request.getHeader(authHeader);
         if (header != null) {
             return header.substring(TOKEN_PREFIX.length());

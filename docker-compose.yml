@@ -10,10 +10,10 @@ services:
       - 8080:8080
     environment:
       POSTGRES_URL: mt2021-backdb:5432
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: postgres
-  ai2020-backdb:
+  mt2021-backdb:
     image: postgres:12.4
     restart: always
     container_name: mt2021-backdb
