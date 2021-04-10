@@ -33,9 +33,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public UserAccessToken createAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest
-    ) throws AuthenticationException {
+    public UserAccessToken createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
+            throws AuthenticationException {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getEmail(),
