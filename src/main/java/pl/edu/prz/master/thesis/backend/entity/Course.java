@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -42,6 +43,12 @@ public class Course implements Serializable {
 
     @Column(name = "NUMBER_OF_HOURS", nullable = false)
     private String numberOfHours;
+
+    @Transient
+    private Set<Long> studentIds = new HashSet<>();
+
+    @Transient
+    private Set<Long> courseCoordinatorIds = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(

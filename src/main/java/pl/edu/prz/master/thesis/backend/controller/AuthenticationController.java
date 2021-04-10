@@ -1,6 +1,7 @@
 package pl.edu.prz.master.thesis.backend.controller;
 
 import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,17 +21,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/auth", produces = APPLICATION_JSON_VALUE)
 @Api(tags = "Authentication Controller")
+@CrossOrigin("*")
+@AllArgsConstructor
 public class AuthenticationController {
 
     private final TokenComponent tokenComponent;
 
     @Lazy
     private final AuthenticationManager authenticationManager;
-
-    public AuthenticationController(TokenComponent tokenComponent, AuthenticationManager authenticationManager) {
-        this.tokenComponent = tokenComponent;
-        this.authenticationManager = authenticationManager;
-    }
 
     @PostMapping("/login")
     public UserAccessToken createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)

@@ -3,7 +3,10 @@ package pl.edu.prz.master.thesis.backend.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.edu.prz.master.thesis.backend.enums.Role;
 import pl.edu.prz.master.thesis.backend.enums.Status;
 

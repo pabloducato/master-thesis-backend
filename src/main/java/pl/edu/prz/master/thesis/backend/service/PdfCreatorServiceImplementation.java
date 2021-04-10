@@ -2,6 +2,7 @@ package pl.edu.prz.master.thesis.backend.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.prz.master.thesis.backend.pdf.PdfCourseProtocol;
 import pl.edu.prz.master.thesis.backend.pdf.PdfCreator;
@@ -16,7 +17,8 @@ import java.io.IOException;
 @AllArgsConstructor
 public class PdfCreatorServiceImplementation implements PdfCreatorService {
 
-    private PdfCreator pdfCreator;
+    @Autowired
+    private final PdfCreator pdfCreator;
 
     @Override
     public ByteArrayOutputStream createPdfCourseProtocolFile(PdfCourseProtocol parsedPdfCourseProtocol) throws IOException {
