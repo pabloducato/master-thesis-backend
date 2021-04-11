@@ -43,7 +43,7 @@ public class StudentController {
     }
 
     @GetMapping("/{academicYear}/season")
-    public List<Student> getAllStudentsByAcademicYear(@PathVariable("academicYear") String academicYear) {
+    public List<StudentDTO> getAllStudentsByAcademicYear(@PathVariable("academicYear") String academicYear) {
         return studentService.getAllStudentsByAcademicYear(academicYear);
     }
 

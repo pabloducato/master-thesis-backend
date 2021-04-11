@@ -106,7 +106,11 @@ public class StudentServiceImplementation implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudentsByAcademicYear(String academicYear) {
-        return studentRepository.findStudentsByAcademicYear(academicYear);
+    public List<StudentDTO> getAllStudentsByAcademicYear(String academicYear) {
+        return studentRepository.findStudentsByAcademicYear(academicYear)
+                .stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .collect(Collectors.toList());
     }
+
 }
