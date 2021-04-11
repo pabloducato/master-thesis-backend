@@ -411,9 +411,13 @@ public class PdfCreator {
         ownFont = PDType0Font.load(document, new File("C:/Windows/Fonts/arial.ttf"));
         document.addPage(page);
 
-        String image = Image.class.getResource("/prz.png").getFile();
+        String image = getClass().getResource("/prz.png").getFile();
+        //NOT WORKING 11.04.2021 - FIX BELOW
+//        String image = Image.class.getResource("/prz.png").getFile();
         PDImageXObject pdImage = PDImageXObject.createFromFile(image, document);
-        String titleImage = Image.class.getResource("/ects.png").getFile();
+        //NOT WORKING 11.04.2021 - FIX BELOW
+//        String titleImage = Image.class.getResource("/ects.png").getFile();
+        String titleImage = getClass().getResource("/ects.png").getFile();
         PDImageXObject pdImage2 = PDImageXObject.createFromFile(titleImage, document);
 
         float startY = PAGE_FORMAT.getHeight();
