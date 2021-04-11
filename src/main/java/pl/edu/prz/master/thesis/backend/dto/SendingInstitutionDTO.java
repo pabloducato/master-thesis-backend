@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -37,5 +39,8 @@ public class SendingInstitutionDTO {
 
     @ApiModelProperty(notes = "The sending institution's fax")
     private String fax;
+
+    @ApiModelProperty(notes = "The sending institution's student ids")
+    private Set<Long> studentIds;
 
 }

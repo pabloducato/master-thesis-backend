@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @Builder
@@ -36,5 +37,8 @@ public class CourseCoordinatorDTO implements Serializable {
 
     @ApiModelProperty(notes = "The course coordinator's fax")
     private String fax;
+
+    @ApiModelProperty(notes = "The course coordinator's course ids")
+    private Set<Long> courseIds;
 
 }

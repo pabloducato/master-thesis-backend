@@ -1,10 +1,15 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
+
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Getter
 @Setter
@@ -37,7 +42,16 @@ public class CourseCoordinator implements Serializable {
     @Column(name = "FAX", nullable = false)
     private String fax;
 
-    @ManyToMany(mappedBy = "courseCoordinators")
-    private Set<Course> courses;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
+    @JoinTable(
+            name = "COURSE_HAS_COORDINATORS",
+            joinColumns = @JoinColumn(name = "COURSE_COORDINATOR_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    private Set<Course> courses = new HashSet<>();
+
+    @Transient
+    private Set<Long> courseIds = new HashSet<>();
 
 }

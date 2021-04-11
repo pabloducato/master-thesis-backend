@@ -6,11 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.prz.master.thesis.backend.entity.CourseCoordinator;
-import pl.edu.prz.master.thesis.backend.entity.Student;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -47,9 +45,9 @@ public class CourseDTO implements Serializable {
     private String numberOfHours;
 
     @ApiModelProperty(notes = "The course's student ids'")
-    private List<Student> courseStudents;
+    private Set<Long> studentIds;
 
     @ApiModelProperty(notes = "The course's coordinator ids'")
-    private List<CourseCoordinator> courseCoordinators;
+    private Set<Long> courseCoordinatorIds;
 
 }

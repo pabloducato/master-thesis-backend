@@ -57,11 +57,11 @@ public class StudentServiceImplementation implements StudentService {
 
     @Override
     public Student fillEntity(Student student) {
-        student.setStudentCourses(student.getCourseIds()
+        student.setCourses(student.getCourseIds()
                 .stream()
                 .map(courseRepository::getOne)
                 .collect(Collectors.toSet()));
-        student.setStudentSendingInstitutions(student.getSendingInstitutionIds()
+        student.setSendingInstitutions(student.getSendingInstitutionIds()
                 .stream()
                 .map(sendingInstitutionRepository::getOne)
                 .collect(Collectors.toSet()));

@@ -2,6 +2,7 @@ package pl.edu.prz.master.thesis.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 import pl.edu.prz.master.thesis.backend.enums.DegreeOfStudy;
 import pl.edu.prz.master.thesis.backend.enums.Semester;
@@ -13,6 +14,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Getter
 @Setter
@@ -89,27 +92,28 @@ public class Student implements Serializable {
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photoBlob;
 
-    @Transient
-    private Set<Long> courseIds = new HashSet<>();
-
     @JsonIgnore
-    @Column(name = "COURSE_IDS")
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
     @JoinTable(
             name = "STUDENT_HAS_COURSES",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
-    private Set<Course> studentCourses;
-
-    @Transient
-    private Set<Long> sendingInstitutionIds = new HashSet<>();
+    private Set<Course> courses = new HashSet<>();
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
     @JoinTable(
             name = "STUDENT_HAS_SENDING_INSTITUTIONS",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "SENDING_INSTITUTION_ID"))
-    private Set<SendingInstitution> studentSendingInstitutions;
+    private Set<SendingInstitution> sendingInstitutions = new HashSet<>();
+
+    @Transient
+    private Set<Long> courseIds = new HashSet<>();
+
+    @Transient
+    private Set<Long> sendingInstitutionIds = new HashSet<>();
 
 }

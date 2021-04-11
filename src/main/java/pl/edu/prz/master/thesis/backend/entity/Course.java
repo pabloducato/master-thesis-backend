@@ -1,11 +1,15 @@
 package pl.edu.prz.master.thesis.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Getter
 @Setter
@@ -44,20 +48,29 @@ public class Course implements Serializable {
     @Column(name = "NUMBER_OF_HOURS", nullable = false)
     private String numberOfHours;
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
+    @JoinTable(
+            name = "COURSE_HAS_COORDINATORS",
+            joinColumns = @JoinColumn(name = "COURSE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_COORDINATOR_ID"))
+    private Set<CourseCoordinator> courseCoordinators = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
+    @JoinTable(
+            name = "STUDENT_HAS_COURSES",
+            joinColumns = {@JoinColumn(name = "COURSE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "STUDENT_ID")}
+    )
+    private Set<Student> students = new HashSet<>();
+
     @Transient
     private Set<Long> studentIds = new HashSet<>();
 
     @Transient
     private Set<Long> courseCoordinatorIds = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "COURSE_HAS_COORDINATORS",
-            joinColumns = @JoinColumn(name = "COURSE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "COURSE_COORDINATOR_ID"))
-    private Set<CourseCoordinator> courseCoordinators;
-
-    @ManyToMany(mappedBy = "studentCourses")
-    private Set<Student> students;
 
 }
