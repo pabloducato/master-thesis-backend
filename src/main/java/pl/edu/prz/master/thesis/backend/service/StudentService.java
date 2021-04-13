@@ -27,6 +27,6 @@ public interface StudentService {
 
     void deactivateStudent(Long id);
 
-    List<Student> getAllStudentsByAcademicYear (String academicYear);
+    List<StudentDTO> getAllStudentsByAcademicYear(String academicYear);
 
 }
