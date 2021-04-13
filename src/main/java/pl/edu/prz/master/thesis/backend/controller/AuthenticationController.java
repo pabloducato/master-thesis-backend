@@ -31,15 +31,9 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public UserAccessToken createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
-            throws AuthenticationException {
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getEmail(),
-                        authenticationRequest.getPassword()
-                )
-        );
-
+    public UserAccessToken createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+        final Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails user = (UserDetails) authentication.getPrincipal();
         String token = tokenComponent.generateToken(user.getUsername(), user.getAuthorities());
