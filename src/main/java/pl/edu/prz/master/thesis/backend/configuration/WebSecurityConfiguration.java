@@ -67,7 +67,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.csrf().ignoringAntMatchers("/auth/**");
         http.cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
@@ -89,6 +88,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/configuration/security", "/swagger-ui", "/swagger-ui.html", "/swagger-ui/**",
                         "/webjars/**", "/v3/api-docs/**", "/spring-security-rest/api/v2/api-docs",
                         "/spring-security-rest/api/v3/api-docs").permitAll()
+                .antMatchers("/actuator/prometheus", "/actuator/prometheus/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
