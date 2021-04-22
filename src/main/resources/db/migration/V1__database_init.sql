@@ -47,7 +47,7 @@ CREATE TABLE USERS
     LAST_NAME              varchar(255)        NOT NULL,
     EMAIL                  varchar(255) UNIQUE NOT NULL,
     PASSWORD               varchar(255)        NOT NULL,
-    LAST_PASSWORD_MODIFIED date,
+    LAST_PASSWORD_MODIFIED timestamp,
     STATUS                 varchar(255)        NOT NULL,
     ROLE                   varchar(255)        NOT NULL,
     PHOTO_BLOB             bytea,

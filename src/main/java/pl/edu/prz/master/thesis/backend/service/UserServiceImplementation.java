@@ -16,8 +16,8 @@ import pl.edu.prz.master.thesis.backend.security.TokenComponent;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import java.time.OffsetDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -124,7 +124,7 @@ public class UserServiceImplementation implements UserService {
         userDTO.setPassword(encodePassword(changePasswordDTO.getNewPassword()));
         User user = modelMapper.map(userDTO, User.class);
         user.setId(userDTO.getId());
-        user.setLastPasswordModified(new Date());
+        user.setLastPasswordModified(OffsetDateTime.now());
         userRepository.save(user);
     }
 

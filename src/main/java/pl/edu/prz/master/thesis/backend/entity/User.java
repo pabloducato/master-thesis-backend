@@ -7,7 +7,7 @@ import pl.edu.prz.master.thesis.backend.enums.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -35,7 +35,7 @@ public class User implements Serializable {
     private String password;
 
     @Column(name = "LAST_PASSWORD_MODIFIED")
-    private Date lastPasswordModified;
+    private OffsetDateTime lastPasswordModified;
 
     @Column(name = "STATUS", nullable = false)
     @Enumerated(EnumType.STRING)

@@ -12,7 +12,6 @@ import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

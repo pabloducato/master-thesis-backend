@@ -93,6 +93,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(
                         new TokenAuthenticationFilter(tokenComponent, jwtUserDetailsService, userRepository, authenticationEntryPoint()), BasicAuthenticationFilter.class);
+//        http.requiresChannel().anyRequest().requiresSecure();
     }
 
     @Bean

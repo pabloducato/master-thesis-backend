@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
@@ -47,9 +48,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                     id = getIdFromToken(token);
                     User user = userRepository.findById(id).get();
                     Date issuedDate = tokenComponent.getIssuedAtFromToken(token);
-                    Date lastPasswordModified = user.getLastPasswordModified();
-                    if (lastPasswordModified != null && issuedDate.before(lastPasswordModified))
-                        throw new AuthenticationServiceException("Password was changed and token is out of date.");
+                    OffsetDateTime lastPasswordModified = user.getLastPasswordModified();
+//                    if (lastPasswordModified != null && issuedDate.before(lastPasswordModified))
+                    if (lastPasswordModified != null)
+                            throw new AuthenticationServiceException("Password was changed and token is out of date.");
                     String email = user.getEmail();
                     UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
