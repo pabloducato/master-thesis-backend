@@ -11,6 +11,7 @@ import pl.edu.prz.master.thesis.backend.enums.Sex;
 import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -52,13 +53,13 @@ public class StudentDTO implements Serializable {
     private String lastName;
 
     @ApiModelProperty(notes = "The student's date of birth")
-    private Date dateOfBirth;
+    private OffsetDateTime dateOfBirth;
 
     @ApiModelProperty(notes = "The student's period of study from")
-    private Date periodOfStudyFrom;
+    private OffsetDateTime periodOfStudyFrom;
 
     @ApiModelProperty(notes = "The student's period of study until")
-    private Date periodOfStudyUntil;
+    private OffsetDateTime periodOfStudyUntil;
 
     @ApiModelProperty(notes = "The student's place of birth")
     private String placeOfBirth;

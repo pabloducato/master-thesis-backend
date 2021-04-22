@@ -11,6 +11,7 @@ import pl.edu.prz.master.thesis.backend.enums.StudyCycle;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,13 +61,13 @@ public class Student implements Serializable {
     private String lastName;
 
     @Column(name = "DATE_OF_BIRTH", nullable = false)
-    private Date dateOfBirth;
+    private OffsetDateTime dateOfBirth;
 
     @Column(name = "PERIOD_OF_STUDY_FROM", nullable = false)
-    private Date periodOfStudyFrom;
+    private OffsetDateTime periodOfStudyFrom;
 
     @Column(name = "PERIOD_OF_STUDY_UNTIL", nullable = false)
-    private Date periodOfStudyUntil;
+    private OffsetDateTime periodOfStudyUntil;
 
     @Column(name = "PLACE_OF_BIRTH", nullable = false)
     private String placeOfBirth;

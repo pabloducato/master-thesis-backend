@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: master-thesis
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/${POSTGRES_DB:postgres}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: ${MAX_DB_CONNECTIONS:80}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        event:
+          merge:
+            entity_copy_observer: allow
+      jdbc:
+        lob:
+          non_contextual_creation: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    io:
+      swagger:
+        models:
+          parameters:
+            AbstractSerializableParameter: ERROR
+
+server:
+  tomcat:
+    threads:
+      max: ${MAX_PROCESSED_REQUESTS_SIMULTANEOUSLY:200}
+    accept-count: ${MAX_SIZE_WAITING_REQUESTS_QUEUE:100}
+
