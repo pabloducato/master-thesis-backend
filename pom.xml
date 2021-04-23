@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>pl.edu.prz</groupId>
-    <artifactId>master.thesis.backend</artifactId>
+    <artifactId>master-thesis-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>master.thesis.backend</name>
     <description>Master&apos;s Thesis Backend</description>
@@ -120,7 +120,7 @@
     </dependencies>
 
     <build>
-        <finalName>master-thesis-backend</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

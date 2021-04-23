@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    initialization-mode: always
-    initialize: true
-    data: classpath:data.sql
