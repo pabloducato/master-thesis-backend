@@ -35,20 +35,20 @@ public class CourseCoordinatorController {
         return courseCoordinatorService.getCourseCoordinatorById(id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createCourseCoordinator(@Valid @RequestBody CourseCoordinatorDTO courseCoordinatorDTO) {
         courseCoordinatorService.createCourseCoordinator(modelMapper.map(courseCoordinatorDTO, CourseCoordinator.class));
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @PutMapping("/{id}")
     public void updateOrAddCourseCoordinator(@Valid @RequestBody CourseCoordinatorDTO courseCoordinatorDTO, @PathVariable("id") Long id) {
         courseCoordinatorService.updateOrAddCourseCoordinator(modelMapper.map(courseCoordinatorDTO, CourseCoordinator.class), id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCourseCoordinator(@PathVariable("id") Long id) {
